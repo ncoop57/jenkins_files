@@ -25,7 +25,7 @@ node('docker_box')
 
     }
 
-    Stage 'Staging'
+    stage 'Static Analysis'
     dir('/home/ec2-user/workspace/DevOps/tests/phpcs/Gadget')
     {
 
