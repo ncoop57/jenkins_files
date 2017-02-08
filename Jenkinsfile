@@ -4,6 +4,7 @@ node('docker_box')
 {
 
     def text
+    def repo = 'https://github.com/UWF-HMCSE-CS/SEMDEVOPS001'
 
     dir('/home/ec2-user/workspace')
     {
@@ -21,6 +22,16 @@ node('docker_box')
 
         checkout.updateTesterRepo()
         echo 'Updated the tester repo'
+
+    }
+
+    Stage 'Staging'
+    dir('/home/ec2-user/workspace/DevOps/tests/phpcs/Gadget')
+    {
+
+        def static_analysis = new StaticStage(step)
+
+        static_analysis.createEnvironment(repo, '/home/ec2-user/workspace/DevOps/tests/phpcs/Gadget')
 
     }
 
