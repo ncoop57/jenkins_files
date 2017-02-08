@@ -1,4 +1,4 @@
-@Library('shared_libraries@feature') import edu.uwf.*
+@Library('shared_libraries') import edu.uwf.*
 
 node('docker_box')
 {
@@ -9,7 +9,7 @@ node('docker_box')
     {
 
         text = sh (script: 'cat test.json', returnStdout: true).trim()
-        
+
     }
 
     stage 'Checkout'
