@@ -31,7 +31,7 @@ node('docker_box')
 
         def static_analysis = new StaticStage(step)
 
-        static_analysis.createEnvironment(repo, '/home/ec2-user/workspace/DevOps/tests/phpcs/Gadget')
+        static_analysis.createEnvironment(repo, /home/ec2-user/workspace/DevOps/tests/phpcs/Gadget)
 
     }
 
