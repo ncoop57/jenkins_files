@@ -28,20 +28,14 @@ class CheckoutStage implements Serializable
 
         try
         {
-        
+
             sh "git clone ${url} ${repo}"
-
-            dir("/home/ec2-user/workspace/jenkins_pipeline/${repo}")
-            {
-
-                sh "git checkout ${branch}"
-
-            }
+            sh "git checkout ${branch}"
 
         }
         catch (e)
         {
-            currentBuild.result = "FAILURE"
+            steps.currentBuild.result = "FAILURE"
         }
 
     }

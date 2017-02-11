@@ -13,6 +13,9 @@ class StaticStage implements Serializable
 
     def createEnvironment(repo)
     {
+
+        steps.sh "${repo}"
+
 /*
         try
         {
