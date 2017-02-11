@@ -12,7 +12,7 @@ class StaticStage implements Serializable
 
     }
 
-    def createEnvironment(repo, path)
+    def createEnvironment(repo)
     {
 
         try
