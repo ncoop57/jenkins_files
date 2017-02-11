@@ -29,7 +29,7 @@ class CheckoutStage implements Serializable
         try
         {
 
-            steps.sh "git clone ${url} ${repo}"
+            steps.sh "git clone ${url} /home/ec2-user/workspace/jenkins_pipeline/${repo}"
             dir("/home/ec2-user/workspace/jenkins_pipeline/${repo}")
             {
                 steps.sh "pwd"
