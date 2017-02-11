@@ -29,8 +29,8 @@ class CheckoutStage implements Serializable
         try
         {
 
-            sh "git clone ${url} ${repo}"
-            sh "git checkout ${branch}"
+            steps.sh "git clone ${url} ${repo}"
+            steps.sh "git checkout ${branch}"
 
         }
         catch (e)
