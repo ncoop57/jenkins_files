@@ -24,13 +24,13 @@ class StaticStage implements Serializable
 
                 static_image = docker.build(${repo})
                 //sh "docker build -t ${repo} ${path}"
-                sh "docker run -v /home/ec2-user/workspace/jenkins_pipeline/${repo}:/pipeline --rm ${repo}"
+                //sh "docker run -v /home/ec2-user/workspace/jenkins_pipeline/${repo}:/pipeline --rm ${repo}"
 
             }
 
             dir("/home/ec2-user/workspace/jenkins_pipeline/${repo}")
             {
-                static_image.run('-v ./:/pipeline --rm ${repo}')
+                static_image.run("-v ./:/pipeline --rm ${repo}"")
             }
 
         }
