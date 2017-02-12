@@ -71,6 +71,6 @@ node('docker_box')
 
     }
 
-    echo text
+    echo text[0]
 
 }
