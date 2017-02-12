@@ -20,9 +20,9 @@ class MergingStage implements Serializable
             steps.dir("/home/ec2-user/workspace/jenkins_pipeline/${repo}")
             {
 
-                sh "git checkout master"
-                sh "git merge ${branch}"
-                sh "git push ${url} master"
+                steps.sh "git checkout master"
+                steps.sh "git merge ${branch}"
+                steps.sh "git push ${url} master"
 
             }
 
