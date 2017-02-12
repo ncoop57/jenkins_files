@@ -48,8 +48,8 @@ def makeStages(def stages, def repo)
         else if (stages[i].equals("integration"))
         {
 
-            def staticAnalysis = new StaticStage(steps)
-            staticAnalysis.createEnvironment(repo, "/home/ec2-user/workspace/DevOps/tests/phpcs/Gadget")
+            def integrationTest = new IntegrationStage(steps)
+            staticAnalysis.createEnvironment(repo, "/home/ec2-user/workspace/DevOps/tests/phpunit")
 
         }
         else if (stages[i].equals("staging"))
