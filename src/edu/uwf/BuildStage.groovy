@@ -22,12 +22,12 @@ class BuildStage implements Serializable
         	{
 
                 // Building the docker image from the Dockerfile
-                maven = script.docker.build("jpipeline")
-                //steps.sh "docker build -t jpipeline ${path}"
-                //steps.sh "docker run --rm jpipeline"
-                //steps.sh "docker exec jpipeline mvn archetype:generate -B -DarchetypeGroupId=org.apache.maven.archetypes -DarchetypeArtifactId=maven-archetype-quickstart -DarchetypeVersion=1.1 -DgroupId=com.company -DartifactId=project -Dversion=1.0-SNAPSHOT -Dpackage=com.company.project; cd ./project; mvn test"
+                //maven = script.docker.build("jpipeline")
+                steps.sh "docker build -t jpipeline ${path}"
+                steps.sh "docker run -t -d -v /home/ec2-user/workspace/jenkins_pipeline/${repo}:/pipeline jpipeline"
+                steps.sh "docker exec jpipeline cd /pipeline/; mvn archetype:generate -B -DarchetypeGroupId=org.apache.maven.archetypes -DarchetypeArtifactId=maven-archetype-quickstart -DarchetypeVersion=1.1 -DgroupId=com.company -DartifactId=project -Dversion=1.0-SNAPSHOT -Dpackage=com.company.project; cd ./project; mvn test"
                 // Running the docker image and creating a container
-                maven.inside
+                /*maven.inside
         		{
 
                     // Generating the maven project with sample app
@@ -37,7 +37,7 @@ class BuildStage implements Serializable
                     // Performing JUnit test on the sample app
         			steps.sh '(cd ./project; mvn test)'
 
-        		}
+        		}*/
 
             }
             //steps.sh "docker build -t ${repo} ${path}"
