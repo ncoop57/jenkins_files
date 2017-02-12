@@ -48,10 +48,18 @@ node('docker_box')
             {
 
                 currentBuild.result = "UNSTABLE"
-                
+
             }
 
         }
+
+    }
+
+    stage ("Cleanup")
+    {
+
+        def cleanupStage = new CleanupStage(steps)
+        cleanupStage.cleanup(repo)
 
     }
 
