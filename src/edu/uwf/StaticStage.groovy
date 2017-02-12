@@ -14,8 +14,13 @@ class StaticStage implements Serializable
     def createEnvironment(repo, path)
     {
 
-        steps.sh "docker build -t ${repo} ${path}"
-        steps.sh "docker run -v /home/ec2-user/workspace/jenkins_pipeline/${repo}:/pipeline --rm ${repo}"
+        steps.stage ("Static Analysis")
+        {
+        
+            steps.sh "docker build -t ${repo} ${path}"
+            steps.sh "docker run -v /home/ec2-user/workspace/jenkins_pipeline/${repo}:/pipeline --rm ${repo}"
+
+        }
 
     }
 

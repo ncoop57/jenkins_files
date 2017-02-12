@@ -8,6 +8,25 @@ def stageParse(def json)
     new groovy.json.JsonSlurper().parseText(json).stages
 }
 
+def makeStages(def stages)
+{
+
+    try
+    {
+
+        def staticAnalysis = new StaticStage(steps)
+        staticAnalysis.createEnvironment(repo, "/home/ec2-user/workspace/DevOps/tests/phpcs/Gadget")
+
+    }
+    catch(e)
+    {
+
+        currentBuild.result = "UNSTABLE"
+
+    }
+
+}
+
 node('docker_box')
 {
 
@@ -23,53 +42,21 @@ node('docker_box')
 
     }
 
-    stage ("Checkout")
+    dir('/home/ec2-user/workspace/DevOps')
     {
 
-        dir('/home/ec2-user/workspace/DevOps')
-        {
+        def checkout = new CheckoutStage(steps)
 
-            def checkout = new CheckoutStage(steps)
-
-            checkout.updateTesterRepo()
-            checkout.checkoutRepo(url, repo, branch)
-            echo 'Updated the tester repo'
-
-        }
+        checkout.updateTesterRepo()
+        checkout.checkoutRepo(url, repo, branch)
+        echo 'Updated the tester repo'
 
     }
 
-    stage ("Static Analysis")
-    {
+    makeStages(text)
 
-        dir('/home/ec2-user/workspace/DevOps/tests/phpcs/Gadget')
-        {
-
-            try
-            {
-
-                def staticAnalysis = new StaticStage(steps)
-                staticAnalysis.createEnvironment(repo, "/home/ec2-user/workspace/DevOps/tests/phpcs/Gadget")
-
-            }
-            catch(e)
-            {
-
-                currentBuild.result = "UNSTABLE"
-
-            }
-
-        }
-
-    }
-
-    stage ("Cleanup")
-    {
-
-        def cleanupStage = new CleanupStage(steps)
-        cleanupStage.cleanup(repo)
-
-    }
+    def cleanupStage = new CleanupStage(steps)
+    cleanupStage.cleanup(repo)
 
     echo text[0]
 
