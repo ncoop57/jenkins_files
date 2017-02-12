@@ -16,7 +16,7 @@ class StaticStage implements Serializable
 
         steps.stage ("Static Analysis")
         {
-        
+
             steps.sh "docker build -t ${repo} ${path}"
             steps.sh "docker run -v /home/ec2-user/workspace/jenkins_pipeline/${repo}:/pipeline --rm ${repo}"
 

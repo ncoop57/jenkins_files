@@ -16,11 +16,50 @@ def makeStages(def stages, def repo)
 
         for (int i = 0; i < stages.size(); i++)
         {
-            if (stages[i].equals("static"))
+
+            if (stages[i].equals("build"))
             {
+
                 def staticAnalysis = new StaticStage(steps)
                 staticAnalysis.createEnvironment(repo, "/home/ec2-user/workspace/DevOps/tests/phpcs/Gadget")
+
             }
+            else if (stages[i].equals("static"))
+            {
+
+                def staticAnalysis = new StaticStage(steps)
+                staticAnalysis.createEnvironment(repo, "/home/ec2-user/workspace/DevOps/tests/phpcs/Gadget")
+
+            }
+            else if (stages[i].equals("unit"))
+            {
+
+                def unitTest = new UnitStage(steps)
+                unitTest.createEnvironment(repo, "/home/ec2-user/workspace/DevOps/tests/localphpunit")
+
+            }
+            else if (stages[i].equals("integration"))
+            {
+
+                def staticAnalysis = new StaticStage(steps)
+                staticAnalysis.createEnvironment(repo, "/home/ec2-user/workspace/DevOps/tests/phpcs/Gadget")
+
+            }
+            else if (stages[i].equals("staging"))
+            {
+
+                def staticAnalysis = new StaticStage(steps)
+                staticAnalysis.createEnvironment(repo, "/home/ec2-user/workspace/DevOps/tests/phpcs/Gadget")
+
+            }
+            else if (stages[i].equals("merging"))
+            {
+
+                def staticAnalysis = new StaticStage(steps)
+                staticAnalysis.createEnvironment(repo, "/home/ec2-user/workspace/DevOps/tests/phpcs/Gadget")
+
+            }
+
         }
 
     }
