@@ -8,7 +8,7 @@ def stageParse(def json)
     new groovy.json.JsonSlurper().parseText(json).stages
 }
 
-def makeStages(def stages)
+def makeStages(def stages, def repo)
 {
 
     try
@@ -53,7 +53,7 @@ node('docker_box')
 
     }
 
-    makeStages(text)
+    makeStages(text, repo)
 
     def cleanupStage = new CleanupStage(steps)
     cleanupStage.cleanup(repo)
