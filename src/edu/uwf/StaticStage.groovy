@@ -11,12 +11,9 @@ class StaticStage implements Serializable
 
     }
 
-    def createEnvironment(repo)
+    def createEnvironment(repo, path)
     {
 
-        steps.echo "${repo}"
-
-/*
         try
         {
 
@@ -40,7 +37,7 @@ class StaticStage implements Serializable
         {
             currentBuild.result = "UNSTABLE"
         }
-*/
+
     }
 
     def thing(args)
