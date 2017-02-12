@@ -90,7 +90,7 @@ node('docker_box')
     {
 
         text = stageParse(sh (script: 'cat test.json', returnStdout: true).trim())
-        text = languageParse(sh (script: 'cat test.json', returnStdout: true).trim())
+        language = languageParse(sh (script: 'cat test.json', returnStdout: true).trim())
 
     }
 
@@ -105,7 +105,7 @@ node('docker_box')
 
     }
 
-    makeStages(text, repo, url, branch)
+    makeStages(text, repo, url, branch, language)
 
     def cleanupStage = new CleanupStage(steps)
     cleanupStage.cleanup(repo)
