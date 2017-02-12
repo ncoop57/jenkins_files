@@ -22,7 +22,7 @@ class BuildStage implements Serializable
         	{
 
                 // Building the docker image from the Dockerfile
-                maven = steps.docker.build("jpipeline")
+                maven = docker.build("jpipeline")
 
                 // Running the docker image and creating a container
                 maven.inside
