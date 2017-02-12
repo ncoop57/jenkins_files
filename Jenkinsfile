@@ -55,8 +55,8 @@ def makeStages(def stages, def repo)
         else if (stages[i].equals("staging"))
         {
 
-            def staticAnalysis = new StaticStage(steps)
-            staticAnalysis.createEnvironment(repo, "/home/ec2-user/workspace/DevOps/tests/phpcs/Gadget")
+            def staging = new StagingStage(steps)
+            staging.createEnvironment(repo, "/home/ec2-user/workspace/DevOps/tests/phpcs/Gadget")
 
         }
         else if (stages[i].equals("merging"))
