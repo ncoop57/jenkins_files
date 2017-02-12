@@ -14,8 +14,14 @@ def makeStages(def stages, def repo)
     try
     {
 
-        def staticAnalysis = new StaticStage(steps)
-        staticAnalysis.createEnvironment(repo, "/home/ec2-user/workspace/DevOps/tests/phpcs/Gadget")
+        for (int i = 0; i < stages.size(); i++)
+        {
+            if (stages[i].equals("static"))
+            {
+                def staticAnalysis = new StaticStage(steps)
+                staticAnalysis.createEnvironment(repo, "/home/ec2-user/workspace/DevOps/tests/phpcs/Gadget")
+            }
+        }
 
     }
     catch(e)
