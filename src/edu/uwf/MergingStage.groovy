@@ -17,7 +17,7 @@ class MergingStage implements Serializable
         steps.stage ("Merging")
         {
 
-            dir("/home/ec2-user/workspace/jenkins_pipeline/${repo}")
+            steps.dir("/home/ec2-user/workspace/jenkins_pipeline/${repo}")
             {
 
                 sh "git checkout master"
