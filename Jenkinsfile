@@ -17,8 +17,8 @@ def makeStages(stages, repo, url, branch)
         if (stages[i].equals("build"))
         {
 
-            def staticAnalysis = new StaticStage(steps)
-            staticAnalysis.createEnvironment(repo, "/home/ec2-user/workspace/DevOps/tests/phpcs/Gadget")
+            def build = new BuildStage(steps)
+            build.createEnvironment(repo, "/home/ec2-user/workspace/DevOps/tests/java/build")
 
         }
         else if (stages[i].equals("static"))
