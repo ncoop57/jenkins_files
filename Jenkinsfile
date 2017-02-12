@@ -1,4 +1,12 @@
 @Library('shared_libraries') import edu.uwf.*
+import groovy.json.JsonSlurper
+
+// parse the stages to do
+@NonCPS
+def stageParse(def json)
+{
+    new groovy.json.JsonSlurper().parseText(json).stages
+}
 
 node('docker_box')
 {
@@ -11,7 +19,7 @@ node('docker_box')
     dir("/home/ec2-user/workspace")
     {
 
-        text = sh (script: 'cat test.json', returnStdout: true).trim()
+        text = stageParse(sh (script: 'cat test.json', returnStdout: true).trim())
 
     }
 
