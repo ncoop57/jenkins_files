@@ -37,9 +37,19 @@ node('docker_box')
         dir('/home/ec2-user/workspace/DevOps/tests/phpcs/Gadget')
         {
 
-            def staticAnalysis = new StaticStage(steps)
+            try
+            {
 
-            staticAnalysis.createEnvironment(repo, "/home/ec2-user/workspace/DevOps/tests/phpcs/Gadget")
+                def staticAnalysis = new StaticStage(steps)
+                staticAnalysis.createEnvironment(repo, "/home/ec2-user/workspace/DevOps/tests/phpcs/Gadget")
+
+            }
+            catch(e)
+            {
+
+                currentBuild.result = "UNSTABLE"
+                
+            }
 
         }
 
