@@ -8,7 +8,14 @@ def stageParse(def json)
     new groovy.json.JsonSlurper().parseText(json).stages
 }
 
-def makeStages(stages, repo, url, branch)
+// parse the language to do
+@NonCPS
+def languageParse(def json)
+{
+    new groovy.json.JsonSlurper().parseText(json).language
+}
+
+def makeStages(stages, repo, url, branch, language)
 {
 
     for (int i = 0; i < stages.size(); i++)
@@ -18,7 +25,7 @@ def makeStages(stages, repo, url, branch)
         {
 
             def build = new BuildStage(steps)
-            build.createEnvironment(this, repo, "/home/ec2-user/workspace/DevOps/tests/java/build")
+            build.createEnvironment(this, repo, "/home/ec2-user/workspace/DevOps/tests/${language}/build")
 
         }
         else if (stages[i].equals("static"))
@@ -27,7 +34,7 @@ def makeStages(stages, repo, url, branch)
             try
             {
                 def staticAnalysis = new StaticStage(steps)
-                staticAnalysis.createEnvironment(repo, "/home/ec2-user/workspace/DevOps/tests/phpcs/Gadget")
+                staticAnalysis.createEnvironment(repo, "/home/ec2-user/workspace/DevOps/tests/${language}/phpcs/Gadget")
 
             }
             catch(e)
@@ -42,21 +49,21 @@ def makeStages(stages, repo, url, branch)
         {
 
             def unitTest = new UnitStage(steps)
-            unitTest.createEnvironment(repo, "/home/ec2-user/workspace/DevOps/tests/localphpunit")
+            unitTest.createEnvironment(repo, "/home/ec2-user/workspace/DevOps/tests/${language}/localphpunit")
 
         }
         else if (stages[i].equals("integration"))
         {
 
             def integrationTest = new IntegrationStage(steps)
-            integrationTest.createEnvironment(repo, "/home/ec2-user/workspace/DevOps/tests/phpunit")
+            integrationTest.createEnvironment(repo, "/home/ec2-user/workspace/DevOps/tests/${language}/phpunit")
 
         }
         else if (stages[i].equals("staging"))
         {
 
             def staging = new StagingStage(steps)
-            staging.createEnvironment(repo, "/home/ec2-user/workspace/DevOps/tests/phpcs/Gadget")
+            staging.createEnvironment(repo, "/home/ec2-user/workspace/DevOps/tests/${language}/phpcs/Gadget")
 
         }
         else if (stages[i].equals("merging"))
@@ -83,6 +90,7 @@ node('docker_box')
     {
 
         text = stageParse(sh (script: 'cat test.json', returnStdout: true).trim())
+        text = languageParse(sh (script: 'cat test.json', returnStdout: true).trim())
 
     }
 
