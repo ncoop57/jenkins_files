@@ -18,7 +18,7 @@ def makeStages(stages, repo, url, branch)
         {
 
             def build = new BuildStage(steps)
-            build.createEnvironment(repo, "/home/ec2-user/workspace/DevOps/tests/java/build")
+            build.createEnvironment(this, repo, "/home/ec2-user/workspace/DevOps/tests/java/build")
 
         }
         else if (stages[i].equals("static"))
