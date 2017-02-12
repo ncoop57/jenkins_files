@@ -62,8 +62,8 @@ def makeStages(stages, repo, url, branch)
         else if (stages[i].equals("merging"))
         {
 
-            def staticAnalysis = new StaticStage(steps)
-            staticAnalysis.createEnvironment(repo, "/home/ec2-user/workspace/DevOps/tests/phpcs/Gadget")
+            def merge = new MergingStage(steps)
+            merge.createEnvironment(repo, "/home/ec2-user/workspace/DevOps/tests/phpcs/Gadget")
 
         }
 
