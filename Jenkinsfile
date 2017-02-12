@@ -49,7 +49,7 @@ def makeStages(def stages, def repo)
         {
 
             def integrationTest = new IntegrationStage(steps)
-            staticAnalysis.createEnvironment(repo, "/home/ec2-user/workspace/DevOps/tests/phpunit")
+            integrationTest.createEnvironment(repo, "/home/ec2-user/workspace/DevOps/tests/phpunit")
 
         }
         else if (stages[i].equals("staging"))
