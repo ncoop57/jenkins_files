@@ -4,7 +4,8 @@ node('docker_box')
 {
 
     def text
-    def repo = "https://github.com/UWF-HMCSE-CS/SEMDEVOPS001.git"
+    def url = "git@github.com:UWF-HMCSE-CS/SEMDEVOPS011.git"
+    def repo = "semdevops11"
 
     dir("/home/ec2-user/workspace")
     {
@@ -22,6 +23,7 @@ node('docker_box')
             def checkout = new CheckoutStage(steps)
 
             checkout.updateTesterRepo()
+            checkout.checkoutRepo(repo, "semdevops011", "master")
             echo 'Updated the tester repo'
 
         }
@@ -34,9 +36,9 @@ node('docker_box')
         dir('/home/ec2-user/workspace/DevOps/tests/phpcs/Gadget')
         {
 
-            def static_analysis = new StaticStage(step)
+            def staticAnalysis = new StaticStage(steps)
 
-            static_analysis.createEnvironment(repo, "/home/ec2-user/workspace/DevOps/tests/phpcs/Gadget")
+            staticAnalysis.createEnvironment("semdevops011", "/home/ec2-user/workspace/DevOps/tests/phpcs/Gadget")
 
         }
 

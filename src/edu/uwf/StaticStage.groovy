@@ -14,36 +14,9 @@ class StaticStage implements Serializable
     def createEnvironment(repo, path)
     {
 
-        try
-        {
+        steps.sh "docker build -t ${repo} ${path}"
+        steps.sh "docker run -v /home/ec2-user/workspace/jenkins_pipeline/${repo}:/pipeline --rm ${repo}"
 
-            def staticImage
-            steps.dir("${path}")
-            {
-
-                //staticImage = docker.build("${repo}")
-                steps.sh "docker build -t ${repo} /home/ec2-user/workspace/DevOps/tests/phpcs/Gadget"
-                steps.sh "docker run -v /home/ec2-user/workspace/jenkins_pipeline/${repo}:/pipeline --rm ${repo}"
-                //sh "docker run -v /home/ec2-user/workspace/jenkins_pipeline/${repo}:/pipeline --rm ${repo}"
-
-            }
-
-            steps.dir("/home/ec2-user/workspace/jenkins_pipeline/${repo}")
-            {
-                //staticImage.run("-v ./:/pipeline --rm ${repo}"")
-            }
-
-        }
-        catch (e)
-        {
-            currentBuild.result = "UNSTABLE"
-        }
-
-    }
-
-    def thing(args)
-    {
-        steps.echo "${args}"
     }
 
 }
