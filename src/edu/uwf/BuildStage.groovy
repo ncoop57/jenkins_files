@@ -33,9 +33,9 @@ class BuildStage implements Serializable
                     // Generating the maven project with sample app
                     steps.sh 'mvn archetype:generate -B -DarchetypeGroupId=org.apache.maven.archetypes -DarchetypeArtifactId=maven-archetype-quickstart -DarchetypeVersion=1.1 -DgroupId=com.company -DartifactId=project -Dversion=1.0-SNAPSHOT -Dpackage=com.company.project'
 
-        			stage 'Unit Test'
+        			//stage 'Unit Test'
                     // Performing JUnit test on the sample app
-        			sh '(cd ./project; mvn test)'
+        			steps.sh '(cd ./project; mvn test)'
 
         		}
 
