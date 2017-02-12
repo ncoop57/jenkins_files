@@ -5,7 +5,7 @@ node('docker_box')
 
     def text
     def url = "git@github.com:UWF-HMCSE-CS/SEMDEVOPS011.git"
-    def repo = "semdevops11"
+    def repo = "semdevops011"
     def branch = "feature"
 
     dir("/home/ec2-user/workspace")
@@ -39,7 +39,7 @@ node('docker_box')
 
             def staticAnalysis = new StaticStage(steps)
 
-            staticAnalysis.createEnvironment("semdevops011", "/home/ec2-user/workspace/DevOps/tests/phpcs/Gadget")
+            staticAnalysis.createEnvironment(repo, "/home/ec2-user/workspace/DevOps/tests/phpcs/Gadget")
 
         }
 
