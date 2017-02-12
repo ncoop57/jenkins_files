@@ -63,7 +63,7 @@ def makeStages(stages, repo, url, branch)
         {
 
             def merge = new MergingStage(steps)
-            merge.createEnvironment(repo, "/home/ec2-user/workspace/DevOps/tests/phpcs/Gadget")
+            merge.createEnvironment(repo, url, branch)
 
         }
 
