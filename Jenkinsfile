@@ -6,6 +6,7 @@ node('docker_box')
     def text
     def url = "git@github.com:UWF-HMCSE-CS/SEMDEVOPS011.git"
     def repo = "semdevops11"
+    def branch = "feature"
 
     dir("/home/ec2-user/workspace")
     {
@@ -23,7 +24,7 @@ node('docker_box')
             def checkout = new CheckoutStage(steps)
 
             checkout.updateTesterRepo()
-            checkout.checkoutRepo(repo, "semdevops011", "master")
+            checkout.checkoutRepo(url, repo, branch)
             echo 'Updated the tester repo'
 
         }
