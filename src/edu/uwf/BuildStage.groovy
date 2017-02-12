@@ -4,7 +4,7 @@ class BuildStage implements Serializable
 {
     def steps
 
-    IntegrationStage(steps)
+    BuildStage(steps)
     {
 
         this.steps = steps
@@ -22,7 +22,7 @@ class BuildStage implements Serializable
         	{
 
                 // Building the docker image from the Dockerfile
-                maven = docker.build("jpipeline")
+                maven = steps.docker.build("jpipeline")
 
                 // Running the docker image and creating a container
                 maven.inside
