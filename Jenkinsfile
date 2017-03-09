@@ -63,7 +63,7 @@ def makeStages(stages, repo, url, branch, language)
         {
 
             def staging = new StagingStage(steps)
-            staging.createEnvironment(repo, "/home/ec2-user/workspace/DevOps/tests/${language}/staging)
+            staging.createEnvironment(repo, "/home/ec2-user/workspace/DevOps/tests/${language}/staging")
 
         }
         else if (stages[i].equals("merging"))
