@@ -84,7 +84,7 @@ node('docker_box')
     def text
     def url = "git@github.com:BhavyanshM/Medium.git"
     def repo = "medium"
-    def branch = "feature"
+    def branch = "master"
 
     dir("/home/ec2-user/workspace")
     {
