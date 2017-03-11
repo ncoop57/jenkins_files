@@ -49,7 +49,7 @@ def makeStages(stages, repo, url, branch, language)
         {
 
             def unitTest = new UnitStage(steps)
-            unitTest.createEnvironment(repo, "/home/ec2-user/workspace/DevOps/tests/${language}/localphpunit")
+            unitTest.createEnvironment(repo, "/home/ec2-user/workspace/DevOps/tests/${language}/unit")
 
         }
         else if (stages[i].equals("integration"))
@@ -82,8 +82,8 @@ node('docker_box')
 {
 
     def text
-    def url = "git@github.com:UWF-HMCSE-CS/SEMDEVOPS011.git"
-    def repo = "semdevops011"
+    def url = "git@github.com:BhavyanshM/Medium.git"
+    def repo = "medium"
     def branch = "feature"
 
     dir("/home/ec2-user/workspace")

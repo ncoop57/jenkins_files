@@ -17,8 +17,7 @@ class UnitStage implements Serializable
         steps.stage ("Unit Testing")
         {
 
-            steps.sh "docker build -t ${repo} ${path}"
-            steps.sh "docker run -v /home/ec2-user/workspace/jenkins_pipeline/${repo}:/pipeline --rm ${repo}"
+            steps.sh "bash ${path}/localtest.sh"
 
         }
 
