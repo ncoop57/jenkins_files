@@ -18,7 +18,7 @@ class UnitStage implements Serializable
         {
 
             steps.sh "bash ${path}/localtest.sh"
-            steps.sh "docker exec jpipeline bash -c 'cd /maven/MediumFX/; mvn -Dtest=* test'"
+            steps.sh "docker exec junit bash -c 'cd /maven/MediumFX/; mvn -Dtest=* test'"
 
         }
 
