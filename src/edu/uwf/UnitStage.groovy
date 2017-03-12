@@ -13,7 +13,7 @@ def createEnvironment(steps, repo, path)
             image.withRun("-v /home/ec2-user/workspace/jenkins_pipeline/medium:/maven")
             {
 
-                steps.sh 'cd /maven/'
+                c -> steps.sh 'pwd'
 
             }
 
