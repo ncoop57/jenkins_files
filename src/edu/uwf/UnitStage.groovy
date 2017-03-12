@@ -17,9 +17,10 @@ class UnitStage implements Serializable
         steps.stage ("Unit Testing")
         {
 
-            steps.sh "bash ${path}/localtest.sh"
-            steps.sh "docker exec junit bash -c 'cd /maven/MediumFX/; mvn -Dtest=* test'"
-            steps.sh "bash ${path}/../../../../../cleanup.sh"
+            var image = steps.docker.build("${path}")
+          //  steps.sh "bash ${path}/localtest.sh"
+          //  steps.sh "docker exec junit bash -c 'cd /maven/MediumFX/; mvn -Dtest=* test'"
+          //  steps.sh "bash ${path}/../../../../../cleanup.sh"
 
         }
 
