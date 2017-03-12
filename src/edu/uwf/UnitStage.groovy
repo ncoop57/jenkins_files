@@ -13,7 +13,7 @@ def createEnvironment(steps, repo, path)
             image.inside
             {
 
-                sh 'echo pwd'
+                steps.sh 'echo pwd'
 
             }
 
