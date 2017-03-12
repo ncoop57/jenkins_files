@@ -33,8 +33,8 @@ def makeStages(stages, repo, url, branch, language)
 
             try
             {
-                def staticAnalysis = new StaticStage(steps)
-                staticAnalysis.createEnvironment(repo, "/home/ec2-user/workspace/DevOps/tests/${language}/phpcs/Gadget")
+                def staticAnalysis = new edu.uwf.StaticStage()
+                staticAnalysis.createEnvironment(repo, "/home/ec2-user/workspace/DevOps/tests/${language}/static")
 
             }
             catch(e)
