@@ -1,24 +1,21 @@
 package edu.uwf
 
-class StaticStage implements Serializable
+def createEnvironment(repo, path)
 {
-    def steps
 
-    StaticStage(steps)
+    stage ("Static Analysis")
     {
 
-        this.steps = steps
-
-    }
-
-    def createEnvironment(repo, path)
-    {
-
-        steps.stage ("Static Analysis")
+        dir("${path}")
         {
 
-            steps.sh "docker build -t ${repo} ${path}"
-            steps.sh "docker run -v /home/ec2-user/workspace/jenkins_pipeline/${repo}:/pipeline --rm ${repo}"
+            def image = docker.build("jstatic")
+            image.inside("-v /home/ec2-user/workspace/jenkins_pipeline/medium:/maven")
+            {
+
+                sh 'pwd'
+
+            }
 
         }
 
