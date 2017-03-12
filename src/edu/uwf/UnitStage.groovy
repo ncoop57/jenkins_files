@@ -6,7 +6,18 @@ def createEnvironment(steps, repo, path)
     steps.stage ("Unit Testing")
     {
 
-        var image = docker.build("${path}")
+        steps.dir("${path}")
+        {
+
+            var image = docker.build("junit")
+            image.inside
+            {
+
+                sh 'echo pwd'
+
+            }
+
+        }
       //  steps.sh "bash ${path}/localtest.sh"
       //  steps.sh "docker exec junit bash -c 'cd /maven/MediumFX/; mvn -Dtest=* test'"
       //  steps.sh "bash ${path}/../../../../../cleanup.sh"
