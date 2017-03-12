@@ -13,7 +13,7 @@ def createEnvironment(steps, repo, path)
             image.inside("-v /home/ec2-user/workspace/jenkins_pipeline/medium:/maven")
             {
 
-                sh 'ls /maven'
+                sh 'bash unit-test.sh'
 
             }
 
