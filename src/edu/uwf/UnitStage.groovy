@@ -9,7 +9,7 @@ def createEnvironment(steps, repo, path)
         steps.dir("${path}")
         {
 
-            var image = docker.build("junit")
+            def image = docker.build("junit")
             image.inside
             {
 
