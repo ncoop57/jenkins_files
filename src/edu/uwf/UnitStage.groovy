@@ -10,7 +10,7 @@ def createEnvironment(steps, repo, path)
         {
 
             def image = docker.build("junit")
-            image.withRun("-v /home/ec2-user/workspace/jenkins_pipeline/medium:/maven")
+            image.inside("-v /home/ec2-user/workspace/jenkins_pipeline/medium:/maven")
             {
 
                 c -> sh 'pwd'
