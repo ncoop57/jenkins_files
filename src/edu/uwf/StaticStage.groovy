@@ -13,7 +13,7 @@ def createEnvironment(repo, path)
             image.inside("-v /home/ec2-user/workspace/jenkins_pipeline/medium:/maven")
             {
 
-                sh 'bash /maven/pmd.sh'
+                sh 'bash pmd.sh'
 
             }
 
