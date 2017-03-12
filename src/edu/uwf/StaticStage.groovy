@@ -9,11 +9,11 @@ def createEnvironment(repo, path)
         dir("${path}")
         {
 
-            def image = docker.build("jstatic")
+            def image = docker.build("static")
             image.inside("-v /home/ec2-user/workspace/jenkins_pipeline/medium:/maven")
             {
 
-                sh 'bash pmd.sh'
+                sh 'bash build.sh'
 
             }
 
