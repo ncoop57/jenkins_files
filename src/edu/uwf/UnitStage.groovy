@@ -9,11 +9,11 @@ def createEnvironment(repo, path)
         dir("${path}")
         {
 
-            def image = docker.build("junit")
-            image.inside("-v /home/ec2-user/workspace/jenkins_pipeline/medium:/maven")
+            def image = docker.build("unit")
+            image.inside("-v /home/ec2-user/workspace/jenkins_pipeline/${repo}:/maven")
             {
 
-                sh 'bash unit-test.sh'
+                sh 'bash build.sh'
 
             }
 
