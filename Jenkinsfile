@@ -24,8 +24,12 @@ def makeStages(stages, repo, url, branch, language)
         if (stages[i].equals("build"))
         {
 
-            //def build = new BuildStage(steps)
-            stage.createEnvironment(repo, "/home/ec2-user/workspace/DevOps/tests/${language}/build", "build")
+            stage("Build")
+            {
+
+                stage.createEnvironment(repo, "/home/ec2-user/workspace/DevOps/tests/${language}/build", "build")
+
+            }
 
         }
         else if (stages[i].equals("static"))
@@ -48,8 +52,8 @@ def makeStages(stages, repo, url, branch, language)
         else if (stages[i].equals("unit"))
         {
 
-            def unitTest = new edu.uwf.UnitStage()
-            unitTest.createEnvironment(repo, "/home/ec2-user/workspace/DevOps/tests/${language}/unit")
+            //def unitTest = new edu.uwf.UnitStage()
+            stage.createEnvironment(repo, "/home/ec2-user/workspace/DevOps/tests/${language}/unit", "unit")
 
         }
         else if (stages[i].equals("integration"))
