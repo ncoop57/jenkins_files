@@ -24,7 +24,7 @@ def makeStages(stages, repo, url, branch, language)
         if (stages[i].equals("build"))
         {
 
-            stage 'Build'
+            stage('Build')
             {
 
                 stage.createEnvironment(repo, "/home/ec2-user/workspace/DevOps/tests/${language}/build", "build")
@@ -51,7 +51,8 @@ def makeStages(stages, repo, url, branch, language)
         }
         else if (stages[i].equals("unit"))
         {
-            stage 'Unit Testing'
+        
+            stage('Unit Testing')
             {
 
                 stage.createEnvironment(repo, "/home/ec2-user/workspace/DevOps/tests/${language}/unit", "unit")
