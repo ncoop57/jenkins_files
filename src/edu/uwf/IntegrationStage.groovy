@@ -1,24 +1,21 @@
 package edu.uwf
 
-class IntegrationStage implements Serializable
+def createEnvironment(repo, path)
 {
-    def steps
 
-    IntegrationStage(steps)
+    stage ("Integration Testing")
     {
 
-        this.steps = steps
-
-    }
-
-    def createEnvironment(repo, path)
-    {
-
-        steps.stage ("Integration Testing")
+        dir("${path}")
         {
 
-            steps.sh "docker build -t ${repo} ${path}"
-            steps.sh "docker run --link database:db -v /home/ec2-user/workspace/jenkins_pipeline/${repo}:/pipeline --rm ${repo}"
+            def image = docker.build("integration")
+            image.inside("-v /home/ec2-user/workspace/jenkins_pipeline/${repo}:/maven")
+            {
+
+                sh 'bash build.sh'
+
+            }
 
         }
 
