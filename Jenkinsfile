@@ -38,7 +38,7 @@ def makeStages(stages, repo, url, branch, language)
             try
             {
 
-                steps.stage('Build')
+                steps.stage('Static Analysis')
                 {
 
                     stage.createEnvironment(repo, "/home/ec2-user/workspace/DevOps/tests/${language}/static", "static")
