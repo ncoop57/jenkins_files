@@ -8,7 +8,7 @@ def call(String name = 'human') {
 def createEnvironment(repo, path, stage)
 {
 
-    stage (stage)
+    stage ("Testing")
     {
         dir("${path}")
         {
