@@ -37,8 +37,13 @@ def makeStages(stages, repo, url, branch, language)
 
             try
             {
-                def staticAnalysis = new edu.uwf.StaticStage()
-                staticAnalysis.createEnvironment(repo, "/home/ec2-user/workspace/DevOps/tests/${language}/static")
+
+                steps.stage('Build')
+                {
+
+                    stage.createEnvironment(repo, "/home/ec2-user/workspace/DevOps/tests/${language}/static", "static")
+
+                }
 
             }
             catch(e)
@@ -113,7 +118,18 @@ node('docker_box')
 
     }
 
-    makeStages(text, repo, url, branch, language)
+    try
+    {
+
+        makeStages(text, repo, url, branch, language)
+
+    }
+    catch(e)
+    {
+
+        currentBuild.result = "FAILURE"
+
+    }
 
     def cleanupStage = new CleanupStage(steps)
     cleanupStage.cleanup(repo)
