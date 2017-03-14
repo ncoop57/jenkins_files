@@ -23,7 +23,7 @@ class BuildStage implements Serializable
             steps.sh "docker exec build bash -c 'cd /maven/MediumFX/;mvn compile'"
 
             steps.sh "docker stop build"
-            steps.sh "docker rm buildimage"
+            steps.sh "docker rm build"
 
         }
 
