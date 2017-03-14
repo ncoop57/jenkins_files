@@ -52,6 +52,8 @@ def makeStages(stages, repo, url, branch, language)
         else if (stages[i].equals("unit"))
         {
 
+            echo "About to do the unit testing stuff"
+
             //def unitTest = new edu.uwf.UnitStage()
             stage ("Unit Testing")
             {
