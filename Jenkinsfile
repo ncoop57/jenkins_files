@@ -53,7 +53,7 @@ def makeStages(stages, repo, url, branch, language)
         {
 
             //def unitTest = new edu.uwf.UnitStage()
-            stage("Unit Testing")
+            stage ("Unit Testing")
             {
 
                 stage.createEnvironment(repo, "/home/ec2-user/workspace/DevOps/tests/${language}/unit", "unit")
