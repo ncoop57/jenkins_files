@@ -24,8 +24,8 @@ def makeStages(stages, repo, url, branch, language)
         if (stages[i].equals("build"))
         {
 
-            def build = new BuildStage(steps)
-            build.createEnvironment(this, repo, "/home/ec2-user/workspace/DevOps/tests/${language}/build")
+            //def build = new BuildStage(steps)
+            stage.createEnvironment(repo, "/home/ec2-user/workspace/DevOps/tests/${language}/build", "build")
 
         }
         else if (stages[i].equals("static"))
@@ -105,7 +105,16 @@ node('docker_box')
 
     }
 
-    makeStages(text, repo, url, branch, language)
+    try
+    {
+        makeStages(text, repo, url, branch, language)
+    }
+    catch(e)
+    {
+
+        currentBuild.result = "FAILURE"
+
+    }
 
     def cleanupStage = new CleanupStage(steps)
     cleanupStage.cleanup(repo)
