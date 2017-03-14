@@ -8,14 +8,18 @@ def call(String name = 'human') {
 def createEnvironment(repo, path, stage)
 {
 
-    dir("${path}")
+    stage (stage)
     {
-
-        def image = docker.build("${stage}")
-        image.inside("-v /home/ec2-user/workspace/jenkins_pipeline/${repo}:/cdep")
+        dir("${path}")
         {
 
-            sh 'bash build.sh'
+            def image = docker.build("${stage}")
+            image.inside("-v /home/ec2-user/workspace/jenkins_pipeline/${repo}:/cdep")
+            {
+
+                sh 'bash build.sh'
+
+            }
 
         }
 
