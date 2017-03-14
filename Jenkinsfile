@@ -100,7 +100,7 @@ node('docker_box')
         def checkout = new CheckoutStage(steps)
 
         checkout.updateTesterRepo()
-        checkout.checkoutRepo(url, repo, branch)
+        //checkout.checkoutRepo(url, repo, branch)
         echo 'Updated the tester repo'
 
     }
