@@ -68,8 +68,13 @@ def makeStages(stages, repo, url, branch, language)
         else if (stages[i].equals("integration"))
         {
 
-            def integrationTest = new edu.uwf.IntegrationStage()
-            integrationTest.createEnvironment(repo, "/home/ec2-user/workspace/DevOps/tests/${language}/integration")
+
+            steps.stage('Integration Testing')
+            {
+
+                stage.createEnvironment(repo, "/home/ec2-user/workspace/DevOps/tests/${language}/integration", "integration")
+
+            }
 
         }
         else if (stages[i].equals("staging"))
