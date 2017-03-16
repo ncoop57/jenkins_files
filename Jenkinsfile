@@ -87,7 +87,7 @@ def makeStages(stages, repo, url, branch, language)
         else if (stages[i].equals("merging"))
         {
 
-            def merge = new MergingStage(steps)
+            def merge = new edu.uwf.MergingStage()
             merge.createEnvironment("/home/ec2-user/workspace/DevOps/tests/staging/stage/${language}_stage/merging", repo, url, branch)
 
         }

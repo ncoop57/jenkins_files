@@ -1,32 +1,19 @@
 package edu.uwf
 
-class MergingStage implements Serializable
+def createEnvironment(path, repo, url, branch)
 {
-    def steps
 
-    MergingStage(steps)
+    stage ("Merging")
     {
 
-        this.steps = steps
-
-    }
-
-    def createEnvironment(path, repo, url, branch)
-    {
-
-        steps.stage ("Merging")
+        dir("${path}")
         {
 
-            dir("${path}")
+            def image = docker.build("merging")
+            image.inside("-v /home/ec2-user/workspace/jenkins_pipeline/${repo}:/pipeline")
             {
 
-                def image = docker.build("merging")
-                image.inside("-v /home/ec2-user/workspace/jenkins_pipeline/${repo}:/pipeline")
-                {
-
-                    sh 'bash build.sh ${branch} ${url}'
-
-                }
+                sh 'bash build.sh ${branch} ${url}'
 
             }
 
