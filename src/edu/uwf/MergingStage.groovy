@@ -21,6 +21,9 @@ def createEnvironment(path, repo, url, branch)
     dir("/home/ec2-user/workspace/jenkins_pipeline/${repo}")
     {
 
+        sh 'git add -A'
+        sh 'git commit -m "Packaged everything"'
+        sh 'git push'
         sh 'git checkout master'
         sh 'git merge ${branch}'
         sh 'git push origin master'
