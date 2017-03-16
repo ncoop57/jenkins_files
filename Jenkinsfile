@@ -123,18 +123,18 @@ node('docker_box')
 
     }
 
-    try
-    {
+    //try
+    //{
 
         makeStages(text, repo, url, branch, language)
 
-    }
-    catch(e)
-    {
+    //}
+    //catch(e)
+    //{
 
-        currentBuild.result = "FAILURE"
+    //    currentBuild.result = "FAILURE"
 
-    }
+    //}
 
     def cleanupStage = new CleanupStage(steps)
     cleanupStage.cleanup(repo)
