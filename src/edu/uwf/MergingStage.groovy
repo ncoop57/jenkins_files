@@ -10,9 +10,20 @@ def createEnvironment(path, repo, url, branch)
         image.inside("-v /home/ec2-user/workspace/jenkins_pipeline/${repo}:/pipeline")
         {
 
-            sh 'bash build.sh ${branch} ${url}'
+            sh 'bash build.sh'
 
         }
+
+
+
+    }
+
+    dir("/home/ec2-user/workspace/jenkins_pipeline/${repo}")
+    {
+
+        sh 'git checkout master'
+        sh 'git merge ${branch}'
+        sh 'git push ${url} master'
 
     }
 
