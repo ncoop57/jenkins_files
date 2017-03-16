@@ -11,18 +11,22 @@ class MergingStage implements Serializable
 
     }
 
-    def createEnvironment(repo, url, branch)
+    def createEnvironment(path, repo, url, branch)
     {
 
         steps.stage ("Merging")
         {
 
-            steps.dir("/home/ec2-user/workspace/jenkins_pipeline/${repo}")
+            dir("${path}")
             {
 
-                steps.sh "git checkout master"
-                steps.sh "git merge ${branch}"
-                steps.sh "git push ${url} master"
+                def image = docker.build("merging")
+                image.inside("-v /home/ec2-user/workspace/jenkins_pipeline/${repo}:/pipeline")
+                {
+
+                    sh 'bash build.sh ${branch} ${url}'
+
+                }
 
             }
 

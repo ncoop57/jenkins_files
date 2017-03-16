@@ -88,7 +88,7 @@ def makeStages(stages, repo, url, branch, language)
         {
 
             def merge = new MergingStage(steps)
-            merge.createEnvironment(repo, url, branch)
+            merge.createEnvironment("/home/ec2-user/workspace/DevOps/tests/staging/stage/${language}_stage/merging", repo, url, branch)
 
         }
 
