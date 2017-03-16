@@ -100,8 +100,8 @@ node('docker_box')
 {
 
     def text
-    def url = "git@github.com:UWF-HMCSE-CS/SEMDEVOPS001.git"//"git@github.com:ncoop57/Medium.git"
-    def repo = "semdevops001"
+    def url = "git@github.com:ncoop57/Medium.git"
+    def repo = "medium"
     def branch = "master"
 
     dir("/home/ec2-user/workspace")
