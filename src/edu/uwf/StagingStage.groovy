@@ -17,7 +17,7 @@ class StagingStage implements Serializable
         steps.stage ("Staging")
         {
 
-            steps.sh "bash ${path}/build.sh"
+            steps.sh "bash ${path}/bash/push.sh ${repo}"
 
         }
 
