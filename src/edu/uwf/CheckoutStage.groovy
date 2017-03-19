@@ -33,7 +33,7 @@ class CheckoutStage implements Serializable
             steps.dir("/home/ec2-user/workspace/jenkins_pipeline/${repo}")
             {
 
-                //steps.sh "git checkout ${branch}"
+                steps.sh "git checkout ${branch}"
 
             }
 
