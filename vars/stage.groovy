@@ -5,7 +5,7 @@ def createEnvironment(repo, path, stage)
     {
 
         def image = docker.build("${stage}")
-        image.inside("--link database:db -v /home/ec2-user/workspace/jenkins_pipeline/${repo}:/cdep")
+        image.inside("-v /home/ec2-user/workspace/jenkins_pipeline/${repo}:/cdep")
         {
 
             sh 'bash build.sh'

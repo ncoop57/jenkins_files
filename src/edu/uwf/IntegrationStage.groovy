@@ -3,19 +3,14 @@ package edu.uwf
 def createEnvironment(repo, path)
 {
 
-    stage ("Integration Testing")
+    dir("${path}")
     {
 
-        dir("${path}")
+        def image = docker.build("integration")
+        image.inside("--link database:db -v /home/ec2-user/workspace/jenkins_pipeline/${repo}:/cdep")
         {
 
-            def image = docker.build("integration")
-            image.inside("-v /home/ec2-user/workspace/jenkins_pipeline/${repo}:/maven")
-            {
-
-                sh 'bash build.sh'
-
-            }
+            sh 'bash build.sh'
 
         }
 

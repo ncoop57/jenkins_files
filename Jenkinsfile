@@ -72,7 +72,8 @@ def makeStages(stages, repo, url, branch, language)
             steps.stage('Integration Testing')
             {
 
-                stage.createEnvironment(repo, "/home/ec2-user/workspace/DevOps/tests/${language}/integration", "integration")
+                def integration = new edu.uwf.IntegrationStage()
+                integration.createEnvironment(repo, "/home/ec2-user/workspace/DevOps/tests/${language}/integration")
 
             }
 
