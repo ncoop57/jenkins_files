@@ -15,6 +15,20 @@ def languageParse(def json)
     new groovy.json.JsonSlurper().parseText(json).language
 }
 
+// Parsing the push notification to get the repo's url
+@NonCPS
+def urlParse(def json)
+{
+    new groovy.json.JsonSlurper().parseText(json).repository.ssh_url
+}
+
+// Parsing the push notification to get the repo's branch
+@NonCPS
+def branchParse(def json)
+{
+    new groovy.json.JsonSlurper().parseText(json).ref
+}
+
 def makeStages(stages, repo, url, branch, language)
 {
 
@@ -105,18 +119,16 @@ def makeStages(stages, repo, url, branch, language)
 node('docker_box')
 {
 
-    def text
-    def url = "git@github.com:ncoop57/Medium.git"
-    def repo = "maven"
-    def branch = "feature"
+    def config
 
-    dir("/home/ec2-user/workspace")
-    {
+    // Grabbing the repo's url
+    def url = urlParse(payload)
 
-        text = stageParse(sh (script: 'cat test.json', returnStdout: true).trim())
-        language = languageParse(sh (script: 'cat test.json', returnStdout: true).trim())
+    // Parsing the url to grab the repo's name
+    def repo = url.tokenize('/')[1].tokenize('.')[0].toLowerCase()
 
-    }
+    // Grabs the branch that was updated
+    def branch = branchParse(payload).tokenize('/')[2].trim()
 
     dir('/home/ec2-user/workspace/DevOps')
     {
@@ -129,10 +141,18 @@ node('docker_box')
 
     }
 
+    dir("/home/ec2-user/workspace/jenkins_pipeline/${repo}")
+    {
+
+        config = stageParse(sh (script: 'cat config.json', returnStdout: true).trim())
+        language = languageParse(config)
+
+    }
+
     try
     {
 
-        makeStages(text, repo, url, branch, language)
+        makeStages(config, repo, url, branch, language)
 
     }
     catch(e)
@@ -144,7 +164,5 @@ node('docker_box')
 
     def cleanupStage = new CleanupStage(steps)
     cleanupStage.cleanup(repo)
-
-    echo text[0]
 
 }
