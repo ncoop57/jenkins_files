@@ -8,17 +8,11 @@ def stageParse(def json)
     new groovy.json.JsonSlurper().parseText(json).stages
 }
 
+// parse the language being used
 @NonCPS
 def languageParse(def json)
 {
     new groovy.json.JsonSlurper().parseText(json).language
-}
-
-// parse the language to do
-@NonCPS
-def configParse(def json)
-{
-    new groovy.json.JsonSlurper().parseText(json)
 }
 
 // Parsing the push notification to get the repo's url
@@ -103,10 +97,6 @@ def makeStages(stages, repo, url, branch, language)
 
             def staging = new StagingStage(steps)
             staging.createEnvironment(repo, "/home/ec2-user/workspace/DevOps/tests/staging/stage/${language}_stage")
-
-        }
-        else if (stages[i].equals("merging"))
-        {
 
             steps.stage('Merging')
             {
