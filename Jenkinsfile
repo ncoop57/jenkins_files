@@ -128,40 +128,46 @@ node('docker_box')
     // Grabs the branch that was updated
     def branch = branchParse(payload).tokenize('/')[2].trim()
 
-    dir('/home/ec2-user/workspace/DevOps')
+    if(branch != "master")
     {
 
-        def checkout = new CheckoutStage(steps)
-
-        checkout.updateTesterRepo()
-        checkout.checkoutRepo(url, repo, branch)
-        echo 'Updated the tester repo'
-
-    }
-
-    try
-    {
-
-        dir("/home/ec2-user/workspace/jenkins_pipeline/${repo}")
+        dir('/home/ec2-user/workspace/DevOps')
         {
 
-            config = sh (script: 'cat config.json', returnStdout: true).trim()
-            stages = stageParse(config)
-            language = languageParse(config)
+            def checkout = new CheckoutStage(steps)
+
+            checkout.updateTesterRepo()
+            checkout.checkoutRepo(url, repo, branch)
+            echo 'Updated the tester repo'
 
         }
 
-        makeStages(stages, repo, url, branch, language)
+        try
+        {
+
+            dir("/home/ec2-user/workspace/jenkins_pipeline/${repo}")
+            {
+
+                config = sh (script: 'cat config.json', returnStdout: true).trim()
+                stages = stageParse(config)
+                language = languageParse(config)
+
+            }
+
+            makeStages(stages, repo, url, branch, language)
+
+        }
+        catch(e)
+        {
+
+            currentBuild.result = "FAILURE"
+
+        }
+
+        def cleanupStage = new CleanupStage(steps)
+        cleanupStage.cleanup(repo)
 
     }
-    catch(e)
-    {
-
-        currentBuild.result = "FAILURE"
-
-    }
-
-    def cleanupStage = new CleanupStage(steps)
-    cleanupStage.cleanup(repo)
+    else echo "Cannot test master branch"
 
 }
