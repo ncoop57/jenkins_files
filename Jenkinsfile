@@ -8,6 +8,12 @@ def stageParse(def json)
     new groovy.json.JsonSlurper().parseText(json).stages
 }
 
+@NonCPS
+def languageParse(def json)
+{
+    new groovy.json.JsonSlurper().parseText(json).language
+}
+
 // parse the language to do
 @NonCPS
 def configParse(def json)
@@ -120,6 +126,8 @@ node('docker_box')
 {
 
     def config
+    def language
+    def stages
 
     // Grabbing the repo's url
     def url = urlParse(payload)
@@ -147,11 +155,13 @@ node('docker_box')
         dir("/home/ec2-user/workspace/jenkins_pipeline/${repo}")
         {
 
-            config = configParse(sh (script: 'cat config.json', returnStdout: true).trim())
+            config = sh (script: 'cat config.json', returnStdout: true).trim()
+            stages = stageParse(config)
+            language = languageParse(config)
 
         }
 
-        makeStages(config.stages, repo, url, branch, config.language)
+        makeStages(stages, repo, url, branch, language)
 
     }
     catch(e)
