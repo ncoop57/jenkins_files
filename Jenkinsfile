@@ -141,18 +141,15 @@ node('docker_box')
 
     }
 
-    stage('Parsing')
+    try
     {
+
         dir("/home/ec2-user/workspace/jenkins_pipeline/${repo}")
         {
 
             config = configParse(sh (script: 'cat config.json', returnStdout: true).trim())
 
         }
-    }
-
-    try
-    {
 
         makeStages(config.stages, repo, url, branch, config.language)
 
