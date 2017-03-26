@@ -24,7 +24,7 @@ def createEnvironment(path, repo, url, branch, language)
 
             sh 'git add -A'
             sh 'git commit -m "Merging"'
-            sh 'git push'
+            //sh 'git push'
 
         }
 
