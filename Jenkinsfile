@@ -10,9 +10,9 @@ def stageParse(def json)
 
 // parse the language to do
 @NonCPS
-def languageParse(def json)
+def configParse(def json)
 {
-    new groovy.json.JsonSlurper().parseText(json).language
+    new groovy.json.JsonSlurper().parseText(json)
 }
 
 // Parsing the push notification to get the repo's url
@@ -141,18 +141,20 @@ node('docker_box')
 
     }
 
-    dir("/home/ec2-user/workspace/jenkins_pipeline/${repo}")
+    stage('Parsing')
     {
+        dir("/home/ec2-user/workspace/jenkins_pipeline/${repo}")
+        {
 
-        config = stageParse(sh (script: 'cat config.json', returnStdout: true).trim())
-        language = languageParse(config)
+            config = configParse(sh (script: 'cat config.json', returnStdout: true).trim())
 
+        }
     }
 
     try
     {
 
-        makeStages(config, repo, url, branch, language)
+        makeStages(config.stages, repo, url, branch, config.language)
 
     }
     catch(e)
