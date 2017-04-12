@@ -128,6 +128,9 @@ node('docker_box')
     // Grabs the branch that was updated
     def branch = branchParse(payload).tokenize('/')[2].trim()
 
+    // Setting the name of the build to the something unique to the repo and branch
+    currentBuild.displayName = "${repo}: ${branch}"
+
     if(branch != "master")
     {
 
