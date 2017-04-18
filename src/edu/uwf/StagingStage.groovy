@@ -14,12 +14,7 @@ class StagingStage implements Serializable
     def createEnvironment(repo, path)
     {
 
-        steps.stage ("Staging")
-        {
-
-            steps.sh "bash ${path}/bash/push.sh ${repo}"
-
-        }
+        steps.sh "bash ${path}/bash/push.sh ${repo}"
 
     }
 

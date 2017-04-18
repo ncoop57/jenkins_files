@@ -38,10 +38,26 @@ def makeStages(stages, repo, url, branch, language)
         if (stages[i].equals("build"))
         {
 
-            steps.stage('Build')
+            try
             {
 
-                stage.createEnvironment(repo, "/home/ec2-user/workspace/DevOps/tests/${language}/build", "build")
+                steps.stage('Build')
+                {
+
+                    if (currentBuild.result != "FAILURE")
+                    {
+
+                        stage.createEnvironment(repo, "/home/ec2-user/workspace/DevOps/tests/${language}/build", "build")
+
+                    }
+
+                }
+
+            }
+            catch(e)
+            {
+
+                currentBuild.result = "FAILURE"
 
             }
 
@@ -55,7 +71,12 @@ def makeStages(stages, repo, url, branch, language)
                 steps.stage('Static Analysis')
                 {
 
-                    stage.createEnvironment(repo, "/home/ec2-user/workspace/DevOps/tests/${language}/static", "static")
+                    if (currentBuild.result != "FAILURE")
+                    {
+
+                        stage.createEnvironment(repo, "/home/ec2-user/workspace/DevOps/tests/${language}/static", "static")
+
+                    }
 
                 }
 
@@ -71,10 +92,26 @@ def makeStages(stages, repo, url, branch, language)
         else if (stages[i].equals("unit"))
         {
 
-            steps.stage('Unit Testing')
+            try
             {
 
-                stage.createEnvironment(repo, "/home/ec2-user/workspace/DevOps/tests/${language}/unit", "unit")
+                steps.stage('Unit Testing')
+                {
+
+                    if (currentBuild.result != "FAILURE")
+                    {
+
+                        stage.createEnvironment(repo, "/home/ec2-user/workspace/DevOps/tests/${language}/unit", "unit")
+
+                    }
+
+                }
+
+            }
+            catch(e)
+            {
+
+                currentBuild.result = "FAILURE"
 
             }
 
@@ -82,12 +119,27 @@ def makeStages(stages, repo, url, branch, language)
         else if (stages[i].equals("integration"))
         {
 
-
-            steps.stage('Integration Testing')
+            try
             {
 
-                def integration = new edu.uwf.IntegrationStage()
-                integration.createEnvironment(repo, "/home/ec2-user/workspace/DevOps/tests/${language}/integration")
+                steps.stage('Integration Testing')
+                {
+
+                    if (currentBuild.result != "FAILURE")
+                    {
+
+                        def integration = new edu.uwf.IntegrationStage()
+                        integration.createEnvironment(repo, "/home/ec2-user/workspace/DevOps/tests/${language}/integration")
+
+                    }
+
+                }
+
+            }
+            catch(e)
+            {
+
+                currentBuild.result = "FAILURE"
 
             }
 
@@ -95,14 +147,51 @@ def makeStages(stages, repo, url, branch, language)
         else if (stages[i].equals("staging"))
         {
 
-            def staging = new StagingStage(steps)
-            staging.createEnvironment(repo, "/home/ec2-user/workspace/DevOps/tests/staging/stage/${language}_stage")
-
-            steps.stage('Merging')
+            try
             {
 
-                def merge = new edu.uwf.MergingStage()
-                merge.createEnvironment("/home/ec2-user/workspace/DevOps/tests/staging/stage/${language}_stage/merging", repo, url, branch, language)
+                steps.stage ("Staging")
+                {
+
+                    if (currentBuild.result != "FAILURE")
+                    {
+
+                        def staging = new StagingStage(steps)
+                        staging.createEnvironment(repo, "/home/ec2-user/workspace/DevOps/tests/staging/stage/${language}_stage")
+
+                    }
+
+                }
+
+            }
+            catch(e)
+            {
+
+                currentBuild.result = "FAILURE"
+
+            }
+
+            try
+            {
+
+                steps.stage('Merging')
+                {
+
+                    if (currentBuild.result != "FAILURE")
+                    {
+
+                        def merge = new edu.uwf.MergingStage()
+                        merge.createEnvironment("/home/ec2-user/workspace/DevOps/tests/staging/stage/${language}_stage/merging", repo, url, branch, language)
+
+                    }
+
+                }
+
+            }
+            catch(e)
+            {
+
+                currentBuild.result = "FAILURE"
 
             }
 
@@ -137,11 +226,22 @@ node('docker_box')
         dir('/home/ec2-user/workspace/DevOps')
         {
 
+            try
+            {
+
             def checkout = new CheckoutStage(steps)
 
             checkout.updateTesterRepo()
             checkout.checkoutRepo(url, repo, branch)
             echo 'Updated the tester repo'
+
+            }
+            catch(e)
+            {
+
+                currentBuild.result = "FAILURE"
+
+            }
 
         }
 
