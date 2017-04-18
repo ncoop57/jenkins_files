@@ -34,7 +34,7 @@ def createEnvironment(path, repo, url, branch, language)
     {
 
         sh 'git checkout master'
-        sh 'git merge ${branch}'
+        sh "git merge ${branch}"
         sh 'git push origin master'
 
     }
