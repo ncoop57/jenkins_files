@@ -50,6 +50,7 @@ def makeStages(stages, repo, url, branch, language)
                         stage.createEnvironment(repo, "/home/ec2-user/workspace/DevOps/tests/${language}/build", "build")
 
                     }
+                    else echo "Skipping due to failure"
 
                 }
 
@@ -77,6 +78,7 @@ def makeStages(stages, repo, url, branch, language)
                         stage.createEnvironment(repo, "/home/ec2-user/workspace/DevOps/tests/${language}/static", "static")
 
                     }
+                    else echo "Skipping due to failure"
 
                 }
 
@@ -104,6 +106,7 @@ def makeStages(stages, repo, url, branch, language)
                         stage.createEnvironment(repo, "/home/ec2-user/workspace/DevOps/tests/${language}/unit", "unit")
 
                     }
+                    else echo "Skipping due to failure"
 
                 }
 
@@ -132,6 +135,7 @@ def makeStages(stages, repo, url, branch, language)
                         integration.createEnvironment(repo, "/home/ec2-user/workspace/DevOps/tests/${language}/integration")
 
                     }
+                    else echo "Skipping due to failure"
 
                 }
 
@@ -160,6 +164,7 @@ def makeStages(stages, repo, url, branch, language)
                         staging.createEnvironment(repo, "/home/ec2-user/workspace/DevOps/tests/staging/stage/${language}_stage")
 
                     }
+                    else echo "Skipping due to failure"
 
                 }
 
@@ -184,6 +189,7 @@ def makeStages(stages, repo, url, branch, language)
                         merge.createEnvironment("/home/ec2-user/workspace/DevOps/tests/staging/stage/${language}_stage/merging", repo, url, branch, language)
 
                     }
+                    else echo "Skipping due to failure"
 
                 }
 
@@ -229,11 +235,11 @@ node('docker_box')
             try
             {
 
-            def checkout = new CheckoutStage(steps)
+                def checkout = new CheckoutStage(steps)
 
-            checkout.updateTesterRepo()
-            checkout.checkoutRepo(url, repo, branch)
-            echo 'Updated the tester repo'
+                checkout.updateTesterRepo()
+                checkout.checkoutRepo(url, repo, branch)
+                echo 'Updated the tester repo'
 
             }
             catch(e)
