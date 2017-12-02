@@ -207,7 +207,7 @@ def makeStages(stages, repo, url, branch, language)
 
 }
 
-node('docker_box')
+node()
 {
 
     def config
