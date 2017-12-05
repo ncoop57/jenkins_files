@@ -23,7 +23,7 @@ def createEnvironment(repo, path, stage)
 	    {
 
 		print "inside node container"
-		sh "cd ./repos/${repo}"
+		sh "ls -l"
 		sh "bash build.sh"
 
 	    }
