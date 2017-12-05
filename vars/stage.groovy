@@ -11,7 +11,7 @@ def createEnvironment(repo, path, stage)
 	    image.inside("--link database:db -v /cdep/repos/${repo}:/cdep")
 	    {
 
-		sh 'bash build.sh'
+		sh 'bash build.sh > output.txt'
 
 	    }
 
