@@ -16,19 +16,13 @@ def createEnvironment(repo, path, stage)
 	    }
 
 	}
-	else if (stage.equals("stage"))
-	{
-
-	    //sh 'bash ${path}'
-
-	}
 	else 
 	{
 
 	    image.inside("-v /cdep/repos/${repo}:/cdep")
 	    {
 
-		sh 'bash build.sh > output.txt'
+		sh 'pwd'
 
 	    }
 
