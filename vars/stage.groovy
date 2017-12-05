@@ -5,12 +5,34 @@ def createEnvironment(repo, path, stage)
     {
 
         def image = docker.build("${stage}")
-        image.inside("-v /home/ec2-user/workspace/jenkins_pipeline/${repo}:/cdep")
-        {
+	if (stage.equals("integration"))
+	{
 
-            sh 'bash build.sh'
+	    image.inside("--link database:db -v /cdep/repos/${repo}:/cdep")
+	    {
 
-        }
+		sh 'bash build.sh'
+
+	    }
+
+	}
+	else if (stage.equals("stage"))
+	{
+
+	    //sh 'bash ${path}'
+
+	}
+	else 
+	{
+
+	    image.inside("-v /cdep/repos/${repo}:/cdep")
+	    {
+
+		sh 'bash build.sh'
+
+	    }
+
+	}
 
     }
 

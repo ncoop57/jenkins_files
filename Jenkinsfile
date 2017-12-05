@@ -35,173 +35,30 @@ def makeStages(stages, repo, url, branch, language)
     for (int i = 0; i < stages.size(); i++)
     {
 
-        if (stages[i].equals("build"))
-        {
+	if (currentBuild.result == "FAILURE")
+	    break;
 
-            try
-            {
+	try
+	{
 
-                steps.stage('Build')
-                {
+	    steps.stage(stages[i])
+	    {
 
-                    if (currentBuild.result != "FAILURE")
-                    {
+		stage.createEnvironment(repo, "cdep/tests/${language}/{stages[i]}", stages[i])
 
-                        stage.createEnvironment(repo, "/home/ec2-user/workspace/DevOps/tests/${language}/build", "build")
+	    }
 
-                    }
-                    else echo "Skipping due to failure"
+	}
+	catch(e)
+	{
 
-                }
-
-            }
-            catch(e)
-            {
-
-                currentBuild.result = "FAILURE"
-
-            }
-
-        }
-        else if (stages[i].equals("static"))
-        {
-
-            try
-            {
-
-                steps.stage('Static Analysis')
-                {
-
-                    if (currentBuild.result != "FAILURE")
-                    {
-
-                        stage.createEnvironment(repo, "/home/ec2-user/workspace/DevOps/tests/${language}/static", "static")
-
-                    }
-                    else echo "Skipping due to failure"
-
-                }
-
-            }
-            catch(e)
-            {
-
+	    if (stages[i].equals("static"))
+	    {
                 currentBuild.result = "UNSTABLE"
+	    }
+	    else currentBuild.result = "FAILURE";
 
-            }
-
-        }
-        else if (stages[i].equals("unit"))
-        {
-
-            try
-            {
-
-                steps.stage('Unit Testing')
-                {
-
-                    if (currentBuild.result != "FAILURE")
-                    {
-
-                        stage.createEnvironment(repo, "/home/ec2-user/workspace/DevOps/tests/${language}/unit", "unit")
-
-                    }
-                    else echo "Skipping due to failure"
-
-                }
-
-            }
-            catch(e)
-            {
-
-                currentBuild.result = "FAILURE"
-
-            }
-
-        }
-        else if (stages[i].equals("integration"))
-        {
-
-            try
-            {
-
-                steps.stage('Integration Testing')
-                {
-
-                    if (currentBuild.result != "FAILURE")
-                    {
-
-                        def integration = new edu.uwf.IntegrationStage()
-                        integration.createEnvironment(repo, "/home/ec2-user/workspace/DevOps/tests/${language}/integration")
-
-                    }
-                    else echo "Skipping due to failure"
-
-                }
-
-            }
-            catch(e)
-            {
-
-                currentBuild.result = "FAILURE"
-
-            }
-
-        }
-        else if (stages[i].equals("staging"))
-        {
-
-            try
-            {
-
-                steps.stage ("Staging")
-                {
-
-                    if (currentBuild.result != "FAILURE")
-                    {
-
-                        def staging = new StagingStage(steps)
-                        staging.createEnvironment(repo, "/home/ec2-user/workspace/DevOps/tests/staging/stage/${language}_stage")
-
-                    }
-                    else echo "Skipping due to failure"
-
-                }
-
-            }
-            catch(e)
-            {
-
-                currentBuild.result = "FAILURE"
-
-            }
-
-            try
-            {
-
-                steps.stage('Merging')
-                {
-
-                    if (currentBuild.result != "FAILURE")
-                    {
-
-                        def merge = new edu.uwf.MergingStage()
-                        merge.createEnvironment("/home/ec2-user/workspace/DevOps/tests/staging/stage/${language}_stage/merging", repo, url, branch, language)
-
-                    }
-                    else echo "Skipping due to failure"
-
-                }
-
-            }
-            catch(e)
-            {
-
-                currentBuild.result = "FAILURE"
-
-            }
-
-        }
+	}
 
     }
 
@@ -229,33 +86,15 @@ node()
     if(branch != "master")
     {
 
-        dir('/home/ec2-user/workspace/DevOps')
-        {
-
-            try
-            {
-
-                def checkout = new CheckoutStage(steps)
-
-                checkout.updateTesterRepo()
-                checkout.checkoutRepo(url, repo, branch)
-                echo 'Updated the tester repo'
-
-            }
-            catch(e)
-            {
-
-                currentBuild.result = "FAILURE"
-
-            }
-
-        }
-
         try
         {
 
-            dir("/home/ec2-user/workspace/jenkins_pipeline/${repo}")
+	    def checkout = new CheckoutStage(steps)
+	    checkout.checkoutRepo(url, repo, branch)
+
+            dir("/cdep/repos/${repo}")
             {
+
 
                 config = sh (script: 'cat config.json', returnStdout: true).trim()
                 stages = stageParse(config)
@@ -273,8 +112,8 @@ node()
 
         }
 
-        def cleanupStage = new CleanupStage(steps)
-        cleanupStage.cleanup(repo)
+	sh 'rm -fr /cdep/repos/${repo}'
+	sh 'rm -fr /cdep/repos/${repo}\\@tmp'
 
     }
     else echo "Cannot test master branch"
