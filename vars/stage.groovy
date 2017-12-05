@@ -22,7 +22,7 @@ def createEnvironment(repo, path, stage)
 	    image.inside("-v /cdep/repos/${repo}:/cdep")
 	    {
 
-		sh 'pwd'
+		sh "bash build.sh"
 
 	    }
 
