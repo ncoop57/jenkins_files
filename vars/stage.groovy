@@ -18,7 +18,7 @@ def createEnvironment(repo, path, stage)
 	}
 	else 
 	{
-
+	    sh "ls -l"
 	    image.inside("-v /cdep:/cdep")
 	    {
 
