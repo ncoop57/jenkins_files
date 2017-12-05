@@ -19,7 +19,7 @@ def createEnvironment(repo, path, stage)
 	else 
 	{
 
-	    image.inside("-v /cdep/repos/${repo}:/cdep")
+	    image.inside("-v /cdep:/cdep")
 	    {
 
 		print "inside node container"
