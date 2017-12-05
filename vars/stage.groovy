@@ -22,7 +22,8 @@ def createEnvironment(repo, path, stage)
 	    image.inside("-v /cdep/repos/${repo}:/cdep")
 	    {
 
-		sh "bash build.sh"
+		print "inside node container"
+		sh("bash build.sh")
 
 	    }
 
