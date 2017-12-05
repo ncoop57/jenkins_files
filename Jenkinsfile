@@ -102,7 +102,7 @@ node()
 
             }
 
-	    sh "ls -l"
+	    sh "ls -l cdep"
             makeStages(stages, repo, url, branch, language)
 
         }
