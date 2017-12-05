@@ -44,7 +44,7 @@ def makeStages(stages, repo, url, branch, language)
 	    steps.stage(stages[i])
 	    {
 
-		stage.createEnvironment(repo, "cdep/tests/${language}/{stages[i]}", stages[i])
+		stage.createEnvironment(repo, "/cdep/tests/${language}/${stages[i]}", stages[i])
 
 	    }
 
