@@ -102,6 +102,7 @@ node()
 
             }
 
+	    sh "ls -l"
             makeStages(stages, repo, url, branch, language)
 
         }
