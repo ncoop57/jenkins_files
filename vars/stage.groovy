@@ -19,15 +19,16 @@ def createEnvironment(repo, path, stage)
 	else 
 	{
 	    sh "ls -l"
-	    image.inside("-v /cdep:/cdep")
-	    {
+	    withEnv(["REPO=${repo}"]) {
+		image.inside("-v /cdep:/cdep")
+		{
 
-		print "inside node container"
-		sh "ls -l"
-		sh "bash build.sh"
+		    print "inside node container"
+		    sh "ls -l"
+		    sh "bash build.sh ${repo}"
 
+		}
 	    }
-
 	}
 
     }
