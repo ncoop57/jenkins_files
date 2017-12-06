@@ -99,6 +99,7 @@ node()
                 config = sh (script: 'cat config.json', returnStdout: true).trim()
                 stages = stageParse(config)
                 language = languageParse(config)
+		sh "ls -l"
 
             }
 
