@@ -99,11 +99,9 @@ node()
                 config = sh (script: 'cat config.json', returnStdout: true).trim()
                 stages = stageParse(config)
                 language = languageParse(config)
-		sh "ls -l"
 
             }
 
-	    sh "ls -l cdep"
             makeStages(stages, repo, url, branch, language)
 
         }

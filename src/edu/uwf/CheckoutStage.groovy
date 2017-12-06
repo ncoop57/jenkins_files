@@ -21,9 +21,7 @@ class CheckoutStage implements Serializable
 	    }
             steps.dir("/cdep/repos/${repo}")
             {
-
                 steps.sh "git checkout ${branch}"
-
             }
 
         }

@@ -7,24 +7,22 @@ def createEnvironment(repo, path, stage)
         def image = docker.build("${stage}")
 	if (stage.equals("integration"))
 	{
+	    withEnv(["REPO=${repo}"]) {
+		image.inside("--link database:db -v /cdep/repos/${repo}:/cdep")
+		{
 
-	    image.inside("--link database:db -v /cdep/repos/${repo}:/cdep")
-	    {
+		    sh "bash build.sh $REPO"
 
-		sh 'bash build.sh'
-
+		}
 	    }
 
 	}
 	else 
 	{
-	    sh "ls -l"
 	    withEnv(["REPO=${repo}"]) {
 		image.inside("-v /cdep:/cdep")
 		{
 
-		    print "inside node container"
-		    sh "ls -l"
 		    sh "bash build.sh $REPO"
 
 		}
