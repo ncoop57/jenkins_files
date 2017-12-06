@@ -116,7 +116,7 @@ node()
 
 	dir("/cdep/repos")
 	{
-	    sh 'rm -fr ${repo}'
+	    sh "rm -fr ${repo}"
 	    //sh 'rm -fr ${repo}\\@tmp'
 	}
 
