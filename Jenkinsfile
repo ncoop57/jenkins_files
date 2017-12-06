@@ -114,8 +114,11 @@ node()
 
         }
 
-	sh 'rm -fr /cdep/repos/${repo}'
-	sh 'rm -fr /cdep/repos/${repo}\\@tmp'
+	dir("/cdep/repos")
+	{
+	    sh 'rm -fr ${repo}'
+	    //sh 'rm -fr ${repo}\\@tmp'
+	}
 
     }
     else echo "Cannot test master branch"
