@@ -15,7 +15,10 @@ class CheckoutStage implements Serializable
         steps.stage ("Checkout")
         {
 
-            steps.sh "git clone ${url} /cdep/repos/${repo}"
+	    steps.dir("/cdep/repos/")
+	    {
+		steps.sh "git clone ${url}"
+	    }
             steps.dir("/cdep/repos/${repo}")
             {
 
