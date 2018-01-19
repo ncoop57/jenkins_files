@@ -29,25 +29,30 @@ def branchParse(def json)
   new groovy.json.JsonSlurper().parseText(json).ref;
 }
 
+// Run through each stage and create the containers for them
 def makeStages(stages, repo, url, branch, language)
 {
 
   for (int i = 0; i < stages.size(); i++)
   {
 
+    // If the current state of the build has failed go ahead and stop
     if (currentBuild.result == "FAILURE")
       break;
 
     try
     {
 
-      steps.stage(stages[i]);
+//      steps.stage(stages[i]);
+      // Create the stage
       stage.createEnvironment(repo, "/cdep/tests/${language}/${stages[i]}", stages[i]);
 
     }
     catch(e)
     {
 
+      // Catch static analysis failures and mark them as unstable since it is
+      // not too important if it fails else mark the current build as failed
       if (stages[i].equals("static"))
         currentBuild.result = "UNSTABLE";
 	    else currentBuild.result = "FAILURE";
