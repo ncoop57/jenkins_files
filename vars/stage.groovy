@@ -5,7 +5,7 @@ def createEnvironment(repo, path, stage)
   {
 
     def image = docker.build("${stage}");
-    if (stage.equals("integration"))
+    if (stage.equals("nothing"))
     {
 
       withEnv(["REPO=${repo}"])
