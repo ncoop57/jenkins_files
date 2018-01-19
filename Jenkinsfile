@@ -43,9 +43,13 @@ def makeStages(stages, repo, url, branch, language)
     try
     {
 
-//      steps.stage(stages[i]);
-      // Create the stage
-      stage.createEnvironment(repo, "/cdep/tests/${language}/${stages[i]}", stages[i]);
+      steps.stage(stages[i])
+      {
+
+        // Create the stage
+        stage.createEnvironment(repo, "/cdep/tests/${language}/${stages[i]}", stages[i]);
+
+      }
 
     }
     catch(e)
