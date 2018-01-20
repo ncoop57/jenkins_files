@@ -4,8 +4,6 @@ def createEnvironment(repo, path, stage)
   dir("${path}")
   {
 
-    def image = docker.build("${stage}");
-    print stage
     if (stage.equals("staging"))
     {
 
@@ -15,6 +13,7 @@ def createEnvironment(repo, path, stage)
     else 
     {
 
+      def image = docker.build("${stage}");
       withEnv(["REPO=${repo}"])
       {
 
