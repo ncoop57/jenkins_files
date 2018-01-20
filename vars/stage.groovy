@@ -27,7 +27,7 @@ def createEnvironment(repo, path, stage)
       withEnv(["REPO=${repo}"])
       {
 
-        image.inside("-v /cdep:/cdep")
+        image.inside("--network=dockercompose_default -v /cdep:/cdep")
         {
 
           sh "bash build.sh $REPO"
