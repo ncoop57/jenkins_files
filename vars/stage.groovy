@@ -5,6 +5,7 @@ def createEnvironment(repo, path, stage)
   {
 
     def image = docker.build("${stage}");
+    print stage
     if (stage.equals("staging"))
     {
 
