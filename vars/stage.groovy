@@ -5,16 +5,17 @@ def createEnvironment(repo, path, stage)
   {
 
     def image = docker.build("${stage}");
-    if (stage.equals("nothing"))
+    if (stage.equals("staging"))
     {
 
+      sh "bash push.sh "
       withEnv(["REPO=${repo}"])
       {
 
         image.inside("--link database:db -v /cdep/repos/${repo}:/cdep")
         {
 
-          sh "bash build.sh $REPO"
+          sh "bash build.sh $REPO /cdep/repos"
 
         }
 

@@ -84,7 +84,7 @@ node()
   def branch = branchParse(payload).tokenize('/')[2].trim();
 
   // Setting the name of the build to the something unique to the repo and branch
-  currentBuild.displayName = "${repo}: ${branch}"
+  currentBuild.displayName = "${repo}: ${branch}";
 
   if(branch != "master")
   {
