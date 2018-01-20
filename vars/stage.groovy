@@ -8,18 +8,7 @@ def createEnvironment(repo, path, stage)
     if (stage.equals("staging"))
     {
 
-      sh "bash push.sh "
-      withEnv(["REPO=${repo}"])
-      {
-
-        image.inside("--link database:db -v /cdep/repos/${repo}:/cdep")
-        {
-
-          sh "bash build.sh $REPO /cdep/repos"
-
-        }
-
-      }
+      sh "bash push.sh $REPO /cdep/repos"
 
     }
     else 
