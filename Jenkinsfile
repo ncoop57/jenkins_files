@@ -58,7 +58,8 @@ def makeStages(stages, repo, url, branch, language)
       // Catch static analysis failures and mark them as unstable since it is
       // not too important if it fails else mark the current build as failed
       if (stages[i].equals("static"))
-        currentBuild.result = "UNSTABLE";
+        continue;
+//        currentBuild.result = "UNSTABLE";
 	    else currentBuild.result = "FAILURE";
 
 	  }
