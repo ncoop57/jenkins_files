@@ -7,7 +7,8 @@ def createEnvironment(repo, url, path, stage)
     if (stage.equals("staging"))
     {
 
-      sh "docker exec -d staging bash /var/www/html/staging.sh ${url} ${repo}"
+      sh "docker exec staging bash /var/www/html/staging.sh ${url}
+/var/www/html/${repo}"
 
     }
     else 
