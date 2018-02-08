@@ -1,4 +1,4 @@
-def createEnvironment(repo, path, stage)
+def createEnvironment(repo, url, path, stage)
 {
 
   dir("${path}")
@@ -7,7 +7,7 @@ def createEnvironment(repo, path, stage)
     if (stage.equals("staging"))
     {
 
-      sh "docker exec -d staging git clone https://github.com/Keenal/hello-world.git"
+      sh "docker exec -d staging bash /var/www/html/staging.sh ${url} ${repo}"
 
     }
     else 
