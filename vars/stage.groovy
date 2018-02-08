@@ -7,7 +7,7 @@ def createEnvironment(repo, path, stage)
     if (stage.equals("staging"))
     {
 
-      sh "bash push.sh $REPO /cdep/repos"
+      sh "docker exec -d staging git clone https://github.com/Keenal/hello-world.git"
 
     }
     else 
