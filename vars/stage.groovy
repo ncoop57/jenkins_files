@@ -1,4 +1,4 @@
-def createEnvironment(repo, url, branch, path, stage)
+def createEnvironment(repo, url, path, stage)
 {
 
   // Perform all the following commands in the given path
