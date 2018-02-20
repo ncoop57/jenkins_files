@@ -14,7 +14,9 @@ def createEnvironment(repo, url, branch, path, stage)
       {
         sh "git add -A"
         sh "git commit -m \"Staging build\""
-        sh "git push"
+        sh "git checkout master"
+        sh "git merge $branch"
+        sh "git push" 
         sh "docker exec -i staging bash /var/www/html/staging.sh ${url} /var/www/html/${repo} $branch"
       }
 
