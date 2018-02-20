@@ -29,8 +29,8 @@ class CheckoutStage implements Serializable
         steps.stage ("Checkout")
         {
 
-            steps.sh "git clone ${url} /home/ec2-user/workspace/jenkins_pipeline/${repo}"
-            steps.dir("/home/ec2-user/workspace/jenkins_pipeline/${repo}")
+            steps.sh "git clone ${url} /cdep/repos/${repo}"
+            steps.dir("/cdep/repos/${repo}")
             {
 
                 steps.sh "git checkout ${branch}"
