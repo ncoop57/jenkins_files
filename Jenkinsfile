@@ -46,7 +46,7 @@ def makeStages(stages, repo, url, branch, language)
       steps.stage(stages[i])
       {
 
-        // Create the stage
+        // Create the stage environment
         stage.createEnvironment(repo, url, branch, "/cdep/tests/${language}/${stages[i]}", stages[i]);
 
       }
@@ -55,11 +55,10 @@ def makeStages(stages, repo, url, branch, language)
     catch(e)
     {
 
-      // Catch static analysis failures and mark them as unstable since it is
+      // Catch static analysis failures since it is
       // not too important if it fails else mark the current build as failed
       if (stages[i].equals("static"))
         continue;
-//        currentBuild.result = "UNSTABLE";
 	    else currentBuild.result = "FAILURE";
 
 	  }
