@@ -12,6 +12,7 @@ def createEnvironment(repo, url, branch, path, stage)
       // Perform the action required for the staging environment
       dir("/cdep/repos/$repo")
       {
+        sh "mv target/*.jar target/application.jar"
         sh "git checkout master"
         sh "git add -A"
         sh "git commit -m \"Staging build\""
