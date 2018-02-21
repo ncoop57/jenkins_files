@@ -13,9 +13,9 @@ def createEnvironment(repo, url, branch, path, stage)
       dir("/cdep/repos/$repo")
       {
         sh "mv target/*.jar target/application.jar"
-        sh "git checkout master"
         sh "git add -A"
         sh "git commit -m \"Staging build\""
+        sh "git checkout master"
         sh "git push" 
         sh "docker exec -i staging bash /var/www/html/staging.sh ${url} /var/www/html/${repo} $branch"
       }
