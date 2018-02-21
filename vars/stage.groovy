@@ -12,10 +12,9 @@ def createEnvironment(repo, url, branch, path, stage)
       // Perform the action required for the staging environment
       dir("/cdep/repos/$repo")
       {
+        sh "git checkout master"
         sh "git add -A"
         sh "git commit -m \"Staging build\""
-        sh "git checkout master"
-        sh "git merge $branch"
         sh "git push" 
         sh "docker exec -i staging bash /var/www/html/staging.sh ${url} /var/www/html/${repo} $branch"
       }
