@@ -39,9 +39,6 @@ def createEnvironment(repo, url, branch, path, stage)
 
       dir("/cdep/repos/$repo")
       {
-        sh "git add -A"
-        sh "git commit -m \"Successfully built application.jar\""
-        sh "git push origin $branch"
         sh "git checkout master"
         sh "git pull origin master"
         sh "git merge $branch"
