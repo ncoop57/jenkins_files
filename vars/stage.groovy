@@ -40,6 +40,8 @@ def createEnvironment(repo, url, branch, path, stage)
       dir("/cdep/repos/$repo")
       {
         sh "git add -A"
+        sh "git commit -m \"Testing\""
+        sh "git push origin $feature"
         sh "git checkout master"
         sh "git pull origin master"
         sh "git merge $branch"
