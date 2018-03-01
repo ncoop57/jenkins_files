@@ -16,7 +16,7 @@ def createEnvironment(repo, url, branch, path, stage)
       }
 
     }
-    else if (stage.equals("build")
+    else if (stage.equals("build"))
     {
 
       // Build the docker image for the specific stage using the Dockerfile in
