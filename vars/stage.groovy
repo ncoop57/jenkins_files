@@ -1,4 +1,4 @@
-def createEnvironment(repo, url, branch, path, stage)
+def createEnvironment(repo, language, url, branch, path, stage)
 {
 
   // Perform all the following commands in the given path
@@ -12,7 +12,7 @@ def createEnvironment(repo, url, branch, path, stage)
       // Perform the action required for the staging environment
       dir("/cdep/repos/$repo")
       {
-        sh "docker exec -i staging bash /var/www/html/staging.sh ${url} /var/www/html/${repo} $branch"
+        sh "docker exec -i staging bash /var/www/html/${language}/staging.sh ${url} /var/www/html/${language}/${repo} $branch"
       }
 
     }
