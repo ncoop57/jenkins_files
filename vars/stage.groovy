@@ -16,39 +16,6 @@ def createEnvironment(repo, url, branch, path, stage)
       }
 
     }
-    else if (stage.equals("build"))
-    {
-
-      // Build the docker image for the specific stage using the Dockerfile in
-      // the current directory
-      def image = docker.build("${stage}");
-      withEnv(["REPO=${repo}", "BRANCH=${branch}"]) // Pass the repo name as an environment variable
-      {
-
-        // Run the docker container with the specified default network and
-        // mounting folder
-        image.inside("--network=dockercompose_default -v /cdep:/cdep")
-        {
-
-          // Execute the specific build script for the given stage on the repo
-          sh "bash build.sh $REPO $BRANCH"
-
-        }
-
-      }
-
-      dir("/cdep/repos/$repo")
-      {
-        sh "git add -A"
-        sh "git commit -m \"Testing\""
-        sh "git push origin $feature"
-        sh "git checkout master"
-        sh "git pull origin master"
-        sh "git merge $branch"
-        sh "git push origin master"
-      }
-
-    }
     else 
     {
 
