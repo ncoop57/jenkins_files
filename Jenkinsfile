@@ -122,6 +122,15 @@ node()
 
     }
 
+    def data = """
+      {'name': 'Thane'}
+    """
+
+
+    def res = httpRequest acceptType: 'APPLICATION_JSON', contentType: 'APPLICATION_JSON', httpMode: 'POST', requestBody: data, url: "http://httpbin.org/ip"
+
+    echo res;
+
   }
   else echo "Cannot test master branch";
 
