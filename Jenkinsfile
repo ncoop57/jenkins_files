@@ -128,7 +128,7 @@ node()
     def logText = logList.get(0);
     for (int i = 1; i < logList.size(); i++)
     {
-      logText += "\n" + logList.get(i);
+      logText += "\\n" + logList.get(i);
     }
     echo logText;
     def data = """
