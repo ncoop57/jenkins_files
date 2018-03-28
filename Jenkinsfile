@@ -125,7 +125,7 @@ node()
     if (currentBuild.result == null) currentBuild.result = "SUCCESS";
     def data = """
       {"name": "$currentBuild.displayName",
-       "result": "$currentBuild.result"}
+       "result": "$currentBuild.rawBuild.log"}
     """
 
 
