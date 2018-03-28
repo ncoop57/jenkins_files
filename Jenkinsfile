@@ -122,8 +122,10 @@ node()
 
     }
 
+  currentBuild.displayName = "${repo}: ${branch}";
     def data = """
-      {"name": "Thane"}
+      {"name": currentBuild.displayName,
+       "logFile": currentBuild.rawBuild}
     """
 
 
