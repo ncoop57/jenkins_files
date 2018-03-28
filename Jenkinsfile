@@ -123,7 +123,7 @@ node()
     }
 
     def data = """
-      {'name': 'Thane'}
+      {"name": "Thane"}
     """
 
 
