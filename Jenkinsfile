@@ -123,7 +123,7 @@ node()
     }
 
     if (currentBuild.result == null) currentBuild.result = "SUCCESS";
-    echo currentBuild.rawBuild.log
+    echo currentBuild.rawBuild.getLog()
     def data = """
       {"name": "$currentBuild.displayName",
        "result": "$currentBuild.rawBuild.log"}
