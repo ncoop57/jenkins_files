@@ -126,7 +126,7 @@ node()
     def numLines = 10000
     def logList = currentBuild.rawBuild.getLog(numLines);
     def logText = logList.get(0);
-    for (int i = 1; i < numLines; i++)
+    for (int i = 1; i < logList.size(); i++)
     {
       logText += "\n" + logList.get(i);
     }
