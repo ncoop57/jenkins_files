@@ -127,7 +127,9 @@ node()
     """
 
 
-    def res = httpRequest acceptType: 'APPLICATION_JSON', contentType: 'APPLICATION_JSON', httpMode: 'POST', requestBody: data, url: "http://httpbin.org/ip"
+    def res = httpRequest acceptType: 'APPLICATION_JSON', contentType: \
+      'APPLICATION_JSON', httpMode: 'POST', requestBody: data, url: \
+      "http://httpbin.org/post"
 
     echo res;
 
