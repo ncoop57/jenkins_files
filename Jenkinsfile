@@ -129,9 +129,9 @@ node()
 
     def res = httpRequest acceptType: 'APPLICATION_JSON', contentType: \
       'APPLICATION_JSON', httpMode: 'POST', requestBody: data, url: \
-      "http://httpbin.org/post"
+      "master/vcdep/build"
 
-    echo res;
+    echo res.content;
 
   }
   else echo "Cannot test master branch";
