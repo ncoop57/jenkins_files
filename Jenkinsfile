@@ -122,7 +122,7 @@ node()
 
     }
 
-  currentBuild.displayName = "${repo}: ${branch}";
+    if (currentBuild.result == null) currentBuild.result = "SUCCESS";
     def data = """
       {"name": "$currentBuild.displayName",
        "result": "$currentBuild.result"}
