@@ -123,11 +123,13 @@ node()
     }
 
     if (currentBuild.result == null) currentBuild.result = "SUCCESS";
-    Scanner scanner = new Scanner(currentBuild.rawBuild.getLogFile());
-    String text = scanner.useDelimiter("\\A").next();
-    scanner.close(); // Put this call in a finally block
-    def log = currentBuild.rawBuild.getLog(10).toString();
-    echo text;
+    def logList = currentBuild.rawBuild.getLog(10);
+    def logText = logList.get(0);
+    for (int i = 1; i < 10; i++)
+    {
+      logText += "\n" + logList.get(i);
+    }
+    echo logText;
     def data = """
       {"name": "$currentBuild.displayName",
        "result": "$currentBuild.rawBuild.log"}
