@@ -129,7 +129,7 @@ node()
 
     def res = httpRequest acceptType: 'APPLICATION_JSON', contentType: \
       'APPLICATION_JSON', httpMode: 'POST', requestBody: data, url: \
-      "vcdep/build"
+      "http://vcdep/build"
 
     echo res.content;
 
