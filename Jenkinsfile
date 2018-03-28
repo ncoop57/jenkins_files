@@ -132,8 +132,8 @@ node()
     }
     echo logText;
     logText = logText.replaceAll("\t", "\\t");
-    logText = logText.replaceAll("\"", "\\"");
-    logText = logText.replaceAll("'", "\\'");
+    logText = logText.replaceAll("\"", "\\\"");
+    logText = logText.replaceAll("'", "\\\'");
     def data = """
       {"name": "$currentBuild.displayName",
        "result": "$currentBuild.result",
