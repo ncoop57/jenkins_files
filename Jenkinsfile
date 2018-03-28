@@ -136,7 +136,7 @@ node()
     def data = """
       {"name": "$currentBuild.displayName",
        "result": "$currentBuild.result",
-       "logFile": "$logText"}
+       "logFile": "\"$logText\""}
     """
 
 
