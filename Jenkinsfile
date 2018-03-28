@@ -131,6 +131,7 @@ node()
       logText += "\\n" + logList.get(i);
     }
     echo logText;
+    logText.replaceAll("\t", "\\t");
     def data = """
       {"name": "$currentBuild.displayName",
        "result": "$currentBuild.result",
