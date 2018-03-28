@@ -123,16 +123,18 @@ node()
     }
 
     if (currentBuild.result == null) currentBuild.result = "SUCCESS";
-    def logList = currentBuild.rawBuild.getLog(10);
+    def numLines = 10000
+    def logList = currentBuild.rawBuild.getLog(numLines);
     def logText = logList.get(0);
-    for (int i = 1; i < 10; i++)
+    for (int i = 1; i < numLines; i++)
     {
       logText += "\n" + logList.get(i);
     }
     echo logText;
     def data = """
       {"name": "$currentBuild.displayName",
-       "result": "$currentBuild.rawBuild.log"}
+       "result": "$currentBuild.result",
+       "logFile": "$logText"}
     """
 
 
