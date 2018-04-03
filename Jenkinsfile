@@ -142,8 +142,8 @@ node()
     }
 //    logText = new groovy.json.StringEscapeUtils().escapeJavaScript(logText);
     def data = getJson(currentBuild.displayName, currentBuild.result, logText);
-    data = data.replace("[", "{");
-    data[data.length() - 1] = '}';
+//    data = data.replace("[", "{");
+//    data[data.length() - 1] = '}';
 //    data = data.substring(1, data.length() - 1);
     echo "Json:" + data;
     def res = httpRequest acceptType: 'APPLICATION_JSON', contentType: \
