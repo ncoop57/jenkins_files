@@ -28,7 +28,7 @@ def getJson(def data)
 {
   def json = new groovy.json.JsonBuilder();
   def root = json name: currentBuild.displayName, result: currentBuild.result, logFile: logText
-  root.toString();
+  return root.toString();
 }
 
 // Parsing the push notification to get the repo's branch
