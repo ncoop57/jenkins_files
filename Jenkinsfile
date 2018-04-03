@@ -132,10 +132,10 @@ node()
       logText += "\n" + logList.get(i);
     }
 //    logText = new groovy.json.StringEscapeUtils().escapeJavaScript(logText);
-    echo logText;
     def json = new groovy.json.JsonBuilder();
     def root = json name: currentBuild.displayName, result: currentBuild.result, logFile: logText
     def data = root.toString();
+    echo data
 
 
     def res = httpRequest acceptType: 'APPLICATION_JSON', contentType: \
