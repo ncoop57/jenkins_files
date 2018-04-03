@@ -148,12 +148,12 @@ node()
 //    data[data.length() - 1] = '}';
 //    data = data.substring(1, data.length() - 1);
     echo "Json:" + data.toString()
-   /* def res = httpRequest acceptType: 'APPLICATION_JSON', contentType: \
-      'APPLICATION_JSON', httpMode: 'POST', requestBody: data, url: \
+    def res = httpRequest acceptType: 'APPLICATION_JSON', contentType: \
+      'APPLICATION_JSON', httpMode: 'POST', requestBody: data.toString(), url: \
       "http://vcdep/build"
 
     echo res.content;
-*/
+
   }
   else echo "Cannot test master branch";
 
