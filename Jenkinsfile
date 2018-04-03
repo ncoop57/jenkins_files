@@ -132,6 +132,7 @@ node()
     }
     echo logText;
     logText = logText.replaceAll("\t", "");
+    logText = logText.replaceAll("\n", "");
     logText = logText.replaceAll("\"", "");
     logText = logText.replaceAll("'", "");
     logText = logText.replaceAll("\\\\", "");
