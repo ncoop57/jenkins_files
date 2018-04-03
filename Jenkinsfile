@@ -27,7 +27,7 @@ def urlParse(def json)
 def getJson(def name, def result, def log)
 {
   def json = new groovy.json.JsonBuilder()
-  json name: name, result: result
+  json name: name, result: result, logFile: log
   echo json.toString()
 }
 
