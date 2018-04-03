@@ -142,7 +142,8 @@ node()
     }
 //    logText = new groovy.json.StringEscapeUtils().escapeJavaScript(logText);
     def data = getJson(currentBuild.displayName, currentBuild.result, logText);
-
+    data = data.substring(1, data.length() - 1);
+    echo "Json:" + data;
     def res = httpRequest acceptType: 'APPLICATION_JSON', contentType: \
       'APPLICATION_JSON', httpMode: 'POST', requestBody: data, url: \
       "http://vcdep/build"
