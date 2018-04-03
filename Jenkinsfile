@@ -136,7 +136,7 @@ node()
     logText = logText.replaceAll("\"", "");
     logText = logText.replaceAll("'", "");
     logText = logText.replaceAll("\\\\", "");
-    logText = logText.replaceAll(/[^\x00-\x7F]/g, "");
+    logText = logText.replaceAll("[^\\x00-\\x7F]", "");
     def data = """
       {"name": "$currentBuild.displayName",
        "result": "$currentBuild.result",
