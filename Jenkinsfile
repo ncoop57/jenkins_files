@@ -68,6 +68,7 @@ def makeStages(stages, repo, url, branch, language)
 
 }
 
+@NonCPS
 node()
 {
 
