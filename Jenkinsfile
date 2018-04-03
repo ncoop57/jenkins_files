@@ -131,12 +131,13 @@ node()
       logText += "newline" + logList.get(i);
     }
     echo logText;
+    logText = JSONObject.quote(logText);/*
     logText = logText.replaceAll("\t", "");
     logText = logText.replaceAll("\n", "");
     logText = logText.replaceAll("\"", "");
     logText = logText.replaceAll("'", "");
     logText = logText.replaceAll("\\\\", "");
-    logText = logText.replaceAll("[^\\x00-\\x7F]", "");
+    logText = logText.replaceAll("[^\\x00-\\x7F]", "");*/
     def data = """
       {"name": "$currentBuild.displayName",
        "result": "$currentBuild.result",
