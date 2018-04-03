@@ -130,6 +130,7 @@ node()
       //sh 'rm -fr ${repo}\\@tmp';
 
     }
+    echo "Test echo";
 
     if (currentBuild.result == null) currentBuild.result = "SUCCESS";
     def numLines = 10000
@@ -143,6 +144,7 @@ node()
     def data = getJson(currentBuild.displayName, currentBuild.result, logText);
     echo "Test echo";
     echo "Json:" + data;
+    echo currentBuild.result;
 
 
     /*def res = httpRequest acceptType: 'APPLICATION_JSON', contentType: \
