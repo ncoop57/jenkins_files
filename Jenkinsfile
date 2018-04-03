@@ -26,9 +26,9 @@ def urlParse(def json)
 @NonCPS
 def getJson(def name, def result, def log)
 {
-  def json = new groovy.json.JsonBuilder();
-  def root = json name: name, result: result, logFile: log
-  return root.toString();
+  def json = new groovy.json.JsonBuilder()
+  json name: name, result: result
+  echo json.toString()
 }
 
 // Parsing the push notification to get the repo's branch
@@ -142,17 +142,17 @@ node()
     }
 //    logText = new groovy.json.StringEscapeUtils().escapeJavaScript(logText);
     def data = getJson(currentBuild.displayName, currentBuild.result, logText);
-    data = data.replace("[", "{");
-    data = data.substring(0, data.length() - 1) + "}";
+//    data = data.replace("[", "{");
+ //   data = data.substring(0, data.length() - 1) + "}";
 //    data[data.length() - 1] = '}';
 //    data = data.substring(1, data.length() - 1);
     echo "Json:" + data;
-    def res = httpRequest acceptType: 'APPLICATION_JSON', contentType: \
+   /* def res = httpRequest acceptType: 'APPLICATION_JSON', contentType: \
       'APPLICATION_JSON', httpMode: 'POST', requestBody: data, url: \
       "http://vcdep/build"
 
     echo res.content;
-
+*/
   }
   else echo "Cannot test master branch";
 
