@@ -131,14 +131,8 @@ node()
     {
       logText += "newline" + logList.get(i);
     }
+    logText = new groovy.json.StringEscapeUtils().escapeJavaScript(logText);
     echo logText;
-    logText = new groovy.json.StringEscapeUtils().escapeJavaScript(logText);/*
-    logText = logText.replaceAll("\t", "");
-    logText = logText.replaceAll("\n", "");
-    logText = logText.replaceAll("\"", "");
-    logText = logText.replaceAll("'", "");
-    logText = logText.replaceAll("\\\\", "");
-    logText = logText.replaceAll("[^\\x00-\\x7F]", "");*/
     def data = """
       {"name": "$currentBuild.displayName",
        "result": "$currentBuild.result",
