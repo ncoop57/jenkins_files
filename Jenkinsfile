@@ -132,7 +132,7 @@ node()
       logText += "newline" + logList.get(i);
     }
     echo logText;
-    logText = new groovy.json.StringEscapeUtils.escapeJavaScript(logText);/*
+    logText = new groovy.json.StringEscapeUtils().escapeJavaScript(logText);/*
     logText = logText.replaceAll("\t", "");
     logText = logText.replaceAll("\n", "");
     logText = logText.replaceAll("\"", "");
