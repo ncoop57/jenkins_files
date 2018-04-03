@@ -29,7 +29,7 @@ def getJson(def name, def result, def log)
   def json = new groovy.json.JsonBuilder()
   json name: name, result: result, logFile: log
   echo json.toString()
-  return json.ToString()
+  return json
 }
 
 // Parsing the push notification to get the repo's branch
@@ -147,7 +147,7 @@ node()
  //   data = data.substring(0, data.length() - 1) + "}";
 //    data[data.length() - 1] = '}';
 //    data = data.substring(1, data.length() - 1);
-    echo "Json:" + data;
+    echo "Json:" + data.toString()
    /* def res = httpRequest acceptType: 'APPLICATION_JSON', contentType: \
       'APPLICATION_JSON', httpMode: 'POST', requestBody: data, url: \
       "http://vcdep/build"
