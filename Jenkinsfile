@@ -1,5 +1,6 @@
 @Library('shared_libraries') import edu.uwf.*
 import groovy.json.JsonSlurper
+import groovy.json.StringEscapeUtils
 
 // parse the stages to do
 @NonCPS
@@ -131,7 +132,7 @@ node()
       logText += "newline" + logList.get(i);
     }
     echo logText;
-    logText = JSONObject.quote(logText);/*
+    logText = escapeJavaScript(logText);/*
     logText = logText.replaceAll("\t", "");
     logText = logText.replaceAll("\n", "");
     logText = logText.replaceAll("\"", "");
