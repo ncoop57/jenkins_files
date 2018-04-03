@@ -140,7 +140,7 @@ node()
       logText += "\n" + logList.get(i);
     }
 //    logText = new groovy.json.StringEscapeUtils().escapeJavaScript(logText);
-    def data = getJson(current.displayName, current.result, logText);
+    def data = getJson(currentBuild.displayName, currentBuild.result, logText);
     echo data
 
 
