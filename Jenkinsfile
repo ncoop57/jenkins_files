@@ -23,6 +23,14 @@ def urlParse(def json)
   new groovy.json.JsonSlurper().parseText(json).repository.ssh_url;
 }
 
+@NonCPS
+def getJson(def data)
+{
+  def json = new groovy.json.JsonBuilder();
+  def root = json name: currentBuild.displayName, result: currentBuild.result, logFile: logText
+  return root.toString();
+}
+
 // Parsing the push notification to get the repo's branch
 @NonCPS
 def branchParse(def json)
@@ -133,9 +141,7 @@ node()
       logText += "\n" + logList.get(i);
     }
 //    logText = new groovy.json.StringEscapeUtils().escapeJavaScript(logText);
-    def json = new groovy.json.JsonBuilder();
-    def root = json name: currentBuild.displayName, result: currentBuild.result, logFile: logText
-    def data = root.toString();
+    def data = getJson();
     echo data
 
 
