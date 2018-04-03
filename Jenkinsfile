@@ -142,7 +142,7 @@ node()
       logText += "\n" + logList.get(i);
     }
     def data = getJson(currentBuild.displayName, currentBuild.result, logText);
-    echo "Json:" + data
+//    echo "Json:" + data
     def res = httpRequest acceptType: 'APPLICATION_JSON', contentType: \
       'APPLICATION_JSON', httpMode: 'POST', requestBody: data, url: \
       "http://vcdep/build"
