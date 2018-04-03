@@ -1,6 +1,6 @@
 @Library('shared_libraries') import edu.uwf.*
 import groovy.json.JsonSlurper
-import groovy.json.StringEscapeUtils
+import groovy.json.JsonBuilder
 
 // parse the stages to do
 @NonCPS
@@ -129,15 +129,13 @@ node()
     def logText = logList.get(0);
     for (int i = 1; i < logList.size(); i++)
     {
-      logText += "newline" + logList.get(i);
+      logText += "\n" + logList.get(i);
     }
-    logText = new groovy.json.StringEscapeUtils().escapeJavaScript(logText);
+//    logText = new groovy.json.StringEscapeUtils().escapeJavaScript(logText);
     echo logText;
-    def data = """
-      {"name": "$currentBuild.displayName",
-       "result": "$currentBuild.result",
-       "logFile": "$logText"}
-    """
+    def json = new groovy.json.JsonBuilder();
+    def root = json name: currentBuild.displayName, result: currentBuild.result, logFile: logText
+    def data = root.toString();
 
 
     def res = httpRequest acceptType: 'APPLICATION_JSON', contentType: \
