@@ -24,10 +24,10 @@ def urlParse(def json)
 }
 
 @NonCPS
-def getJson(def data)
+def getJson(def name, def result, def log)
 {
   def json = new groovy.json.JsonBuilder();
-  def root = json name: currentBuild.displayName, result: currentBuild.result, logFile: logText
+  def root = json name: name, result: result, logFile: log
   return root.toString();
 }
 
@@ -140,7 +140,7 @@ node()
       logText += "\n" + logList.get(i);
     }
 //    logText = new groovy.json.StringEscapeUtils().escapeJavaScript(logText);
-    def data = getJson(logText);
+    def data = getJson(current.displayName, current.result, logText);
     echo data
 
 
