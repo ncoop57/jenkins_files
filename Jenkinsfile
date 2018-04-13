@@ -128,7 +128,7 @@ node()
     {
 
       sh "rm -fr ${repo}";
-      //sh 'rm -fr ${repo}\\@tmp';
+      sh 'rm -fr ${repo}\\@tmp';
 
     }
     echo "Test echo";
