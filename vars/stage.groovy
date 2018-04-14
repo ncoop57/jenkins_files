@@ -6,7 +6,7 @@ def createEnvironment(repo, language, url, branch, path, stage)
   {
 
     // Check the stage type
-    if (stage.equals("staging"))
+    if (stage.equals("deploy"))
     {
 
       // Perform the action required for the staging environment
